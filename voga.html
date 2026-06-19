@@ -1,0 +1,1581 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Roboto+Condensed:wght@400;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>王韋仁 Matthew Wang — 工業設計</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F0EFED;
+  --black: #1a1a1a;
+  --grey: #999999;
+  --light-grey: #c8c8c8;
+  --border: #d0cfc9;
+  --margin: 50px;
+  --heading: 56px;
+  --body: 24px;
+  --small: 18px;
+}
+
+html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--black);
+  font-family: 'Noto Serif TC', serif;
+  font-size: var(--body);
+  width: 100%; margin: 0;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px var(--margin);
+  background: rgba(240,239,237,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-name {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size:22px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 48px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Noto Serif TC', serif;
+  font-size:18px;
+  color: var(--grey);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--black); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+}
+
+.hero-left {
+  position: relative;
+  overflow: hidden;
+  background: #e8e5df;
+}
+
+.hero-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  mix-blend-mode: multiply;
+  filter: grayscale(8%);
+}
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px var(--margin) 80px 90px;
+}
+
+.hero-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: var(--small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 24px;
+}
+
+.hero-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size:108px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+
+.hero-name-en {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size:64px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 60px;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--black);
+  margin-bottom: 40px;
+}
+
+.hero-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 80px;
+}
+
+.hero-contact a,
+.hero-contact span {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: var(--small);
+  letter-spacing: 0.08em;
+  color: var(--grey);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.hero-contact a:hover { color: var(--black); }
+
+.hero-scroll {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: var(--small);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--light-grey);
+}
+
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: var(--light-grey);
+}
+
+/* ABOUT */
+#about {
+  padding: 140px var(--margin);
+  display: grid;
+  grid-template-columns: 340px 1fr 1fr;
+  gap: 0 80px;
+  border-top: 1px solid var(--border);
+}
+
+.section-index {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size:14px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--light-grey);
+  padding-top: 8px;
+}
+
+.section-heading {
+  font-family: 'Noto Serif TC', serif;
+  font-size: var(--heading);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--black);
+  margin-bottom: 48px;
+}
+
+.about-block {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.about-entry {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.about-entry-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: var(--small);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 16px;
+}
+
+.about-entry-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: var(--body);
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.about-entry-desc {
+  font-family: 'Noto Serif TC', serif;
+  font-size:20px;
+  color: var(--grey);
+  line-height: 1.8;
+}
+
+.about-entry-org {
+  font-family: 'Noto Serif TC', serif;
+  font-size:18px;
+  color: var(--light-grey);
+  margin-top: 6px;
+}
+
+/* QUOTE */
+#quote {
+  padding: 160px var(--margin);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-inner {
+  max-width: 900px;
+  text-align: center;
+}
+
+.quote-fr {
+  font-family: 'Noto Serif TC', serif;
+  font-size:35px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--light-grey);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.quote-en {
+  font-family: 'Noto Serif TC', serif;
+  font-size: var(--body);
+  font-style: italic;
+  color: var(--grey);
+  margin-bottom: 20px;
+}
+
+.quote-author {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: var(--small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+/* PROJECT INTRO */
+#project {
+  border-top: 1px solid var(--border);
+}
+
+.project-hero {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-hero-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 60px var(--margin);
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.project-hero-title {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size:124px;
+  letter-spacing: 0.06em;
+  color: #fff;
+  line-height: 1;
+}
+
+.project-hero-subtitle {
+  font-family: 'Noto Serif TC', serif;
+  font-size:27px;
+  color: rgba(255,255,255,0.7);
+  max-width: 500px;
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* PROJECT META */
+.project-meta {
+  padding: 80px var(--margin);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-item {
+  padding: 0 40px 0 0;
+  border-right: 1px solid var(--border);
+  margin-right: 40px;
+}
+
+.meta-item:last-child {
+  border-right: none;
+  margin-right: 0;
+}
+
+.meta-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: var(--small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--light-grey);
+  margin-bottom: 12px;
+}
+
+.meta-value {
+  font-family: 'Noto Serif TC', serif;
+  font-size: var(--body);
+  color: var(--black);
+  line-height: 1.6;
+}
+
+/* PROJECT CONTENT */
+.project-content {
+  padding: 100px var(--margin);
+}
+
+.project-section {
+  margin-bottom: 120px;
+}
+
+.project-section-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: var(--small);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--light-grey);
+  margin-bottom: 28px;
+}
+
+.project-section-heading {
+  font-family: 'Noto Serif TC', serif;
+  font-size: var(--heading);
+  font-weight: 400;
+  color: var(--black);
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+
+.project-section-body {
+  font-family: 'Noto Serif TC', serif;
+  font-size: var(--body);
+  color: var(--grey);
+  line-height: 1.9;
+  max-width: 760px;
+}
+
+/* 雙欄專案排版 (電腦版) */
+.project-split-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 80px;
+}
+
+.project-left-column {
+    flex: 1;
+}
+
+.project-right-column {
+    flex: 1;
+    position: sticky;
+    top: 40px;
+}
+
+/* 手機版自動變回上下排版 (RWD) */
+@media (max-width: 768px) {
+    .project-split-layout {
+        flex-direction: column; /* 變成上下堆疊 */
+        gap: 40px;
+    }
+    .project-right-column {
+        position: static; /* 手機版取消黏貼效果，避免擋住畫面 */
+        width: 100%; /* 圖表佔滿手機寬度 */
+    }
+}
+
+/* IMAGE GRIDS */
+.img-full {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.img-full img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.img-two img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-three {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 2px;
+}
+
+.img-three img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-caption {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: var(--small);
+  letter-spacing: 0.1em;
+  color: var(--light-grey);
+  padding: 14px 0 40px;
+}
+
+/* TOOLS */
+.tools-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.tool-tag {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: var(--small);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+}
+
+/* LAYOUT SPLIT */
+.split-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+
+.split-layout.reverse { direction: rtl; }
+.split-layout.reverse > * { direction: ltr; }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 80px var(--margin);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.footer-name {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size:60px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--black);
+  line-height: 1;
+}
+
+.footer-sub {
+  font-family: 'Noto Serif TC', serif;
+  font-size:18px;
+  color: var(--grey);
+  margin-top: 12px;
+}
+
+.footer-contact {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-contact a,
+.footer-contact span {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: var(--small);
+  letter-spacing: 0.1em;
+  color: var(--grey);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-contact a:hover { color: var(--black); }
+
+.footer-copy {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size:14px;
+  letter-spacing: 0.12em;
+  color: var(--light-grey);
+  margin-top: 24px;
+}
+
+/* FADE IN ON SCROLL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+
+  /* ===== CROSS-SECTION CHART (from problem-quadrant.html) ===== */
+  .tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  .tool-tag {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: var(--small);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: transparent;
+    border: 1px solid var(--black);
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .tool-tag:hover { background: var(--black); color: var(--bg); }
+  .tool-tag.active { background: var(--black); color: var(--bg); }
+
+  .cross-wrap {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1.1;
+    position: relative;
+    border-top: 1px solid var(--black);
+  }
+  .axis-h, .axis-v { position: absolute; background: var(--black); }
+  .axis-h { left: 0; right: 0; top: 50%; height: 1px; }
+  .axis-v { top: 6%; bottom: 6%; left: 0%; width: 1px; }
+  .grey-line { position: absolute; background: var(--border); }
+  .grey-line.thicker { background: var(--light-grey); }
+
+  .corner-label {
+    position: absolute;
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size:12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--grey);
+    pointer-events: none;
+    z-index: 4;
+  }
+  .corner-cn {
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size:24px;
+    color: var(--black);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+    display: block;
+  }
+  .corner-tl { top: 50px; left: 150px; }
+  .corner-bl { bottom: 25%; left: 280px; }
+  .corner-tr { top: 50px; right: 27%; }
+  .corner-br { bottom: 5%; right: 2%; text-align: right; }
+  .corner-label.hidden { display: none; }
+
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--light-grey);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.2,.8,.2,1);
+    color: var(--black);
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-size:24px;
+    line-height: 1.45;
+    padding: 10px;
+    user-select: none;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  .bubble:hover {
+    border: 1.5px solid var(--black);
+    color: var(--black);
+    z-index: 20;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+  .bubble.selected {
+    background: var(--black);
+    color: var(--bg);
+    border: 1px solid var(--black);
+    z-index: 25;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+  .bubble.dim {
+    border-color: var(--border);
+    color: var(--light-grey);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  .bubble.filled, .bubble.filled-teal, .bubble.filled-cyan, .bubble.filled-red {
+    border: none;
+    background: transparent;
+    color: var(--black);
+    isolation: isolate;
+    overflow: visible;
+  }
+  .bubble.filled::before,
+  .bubble.filled-teal::before,
+  .bubble.filled-cyan::before,
+  .bubble.filled-red::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    filter: blur(12px);
+    z-index: -1;
+  }
+  .bubble.filled::before        { background: rgba(0, 153, 102, 0.35); }
+  .bubble.filled-teal::before   { background: rgba(53, 124, 140, 0.35); }
+  .bubble.filled-cyan::before   { background: rgba(0, 204, 204, 0.35); }
+  .bubble.filled-red::before    { background: rgba(255, 51, 0, 0.35); }
+  .bubble.filled:hover::before        { background: rgba(0, 153, 102, 0.55); }
+  .bubble.filled-teal:hover::before   { background: rgba(53, 124, 140, 0.55); }
+  .bubble.filled-cyan:hover::before   { background: rgba(0, 204, 204, 0.55); }
+  .bubble.filled-red:hover::before    { background: rgba(255, 51, 0, 0.55); }
+  .bubble.filled.selected, .bubble.filled-teal.selected,
+  .bubble.filled-cyan.selected, .bubble.filled-red.selected {
+    border: none; background: transparent; color: var(--bg);
+  }
+  .bubble.filled.selected::before        { background: rgba(0, 153, 102, 0.85); }
+  .bubble.filled-teal.selected::before   { background: rgba(53, 124, 140, 0.85); }
+  .bubble.filled-cyan.selected::before   { background: rgba(0, 204, 204, 0.85); }
+  .bubble.filled-red.selected::before    { background: rgba(255, 51, 0, 0.85); }
+  .bubble.filled.dim, .bubble.filled-teal.dim,
+  .bubble.filled-cyan.dim, .bubble.filled-red.dim {
+    background: transparent; color: var(--light-grey);
+  }
+  .bubble.filled.dim::before        { background: rgba(0, 153, 102, 0.15); }
+  .bubble.filled-teal.dim::before   { background: rgba(53, 124, 140, 0.15); }
+  .bubble.filled-cyan.dim::before   { background: rgba(0, 204, 204, 0.15); }
+  .bubble.filled-red.dim::before    { background: rgba(255, 51, 0, 0.15); }
+
+  .chart-frame {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: 1fr 60px;
+    column-gap: 16px;
+    row-gap: 16px;
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+  .y-axis-title {
+    grid-column: 1; grid-row: 1;
+    position: relative;
+    padding-right: 50%;
+  }
+  .y-axis-rotated {
+    position: absolute;
+    top: 50%; left: 90%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .x-axis-title {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    padding-left: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    white-space: nowrap;
+    z-index: 5;
+    background: var(--bg);
+  }
+  .axis-eng {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size:12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+  .axis-cn {
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size:24px;
+    letter-spacing: 0.15em;
+    color: var(--black);
+  }
+  .axis-arrow {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-size:14px;
+    color: var(--light-grey);
+    letter-spacing: 0.10em;
+  }
+  .chart-cell { grid-column: 2; grid-row: 1; }
+
+  @media (max-width: 800px) {
+    .bubble { font-size:24px; padding: 6px; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="portfolio.html">MW</a>
+  <ul class="nav-links">
+    <li><a href="portfolio.html">← 返回</a></li>
+    <li><a href="mailto:F34111023@gs.ncku.edu.tw">聯繫</a></li>
+  </ul>
+</nav>
+
+<div style="padding-top:80px;">
+<!-- PROJECT -->
+<section id="project">
+  <div class="project-hero">
+    <img src="VOGA-intro.webp" alt="瑜珈墊設計渲染圖">
+    <div class="project-hero-overlay">
+      <p class="project-hero-title">VOGA</p>
+      <p class="project-hero-subtitle">協助視障者獨立運動的瑜珈墊</p>
+    </div>
+  </div>
+
+  <div class="project-meta">
+    <div class="meta-item">
+      <p class="meta-label">使用者</p>
+      <p class="meta-value">視障者<br>盲人</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label">地點</p>
+      <p class="meta-value">住家</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label">進行時長</p>
+      <p class="meta-value">兩個月</p>
+    </div>
+    <div class="meta-item">
+      <p class="meta-label">使用軟體</p>
+      <p class="meta-value">Solidworks · Keyshot<br>Photoshop · Illustrator</p>
+    </div>
+  </div>
+
+  <div class="project-content">
+
+    <div class="project-split-layout reveal">
+
+      <div class="project-left-column">
+
+        <div class="project-section">
+          <div class="tools-grid" style="margin-top:0;margin-bottom:32px;">
+            <span class="tool-tag">個人作品</span>
+            <span class="tool-tag">工業設計</span>
+            <span class="tool-tag">使用者研究</span>
+            <span class="tool-tag">輔助器具</span>
+          </div>
+          <p class="project-section-label">01 — 設計概念</p>
+          <h3 class="project-section-heading">尋找有關視障者的議題</h3>
+          <p class="project-section-body">
+            鎖定視障者的運動方式與運動習慣為主軸。發現對於視障者來說，運動是為了改善心理狀態，讓自己感覺是健康的。面對到最大的問題是不想要每次運動時都需要旁人協助。
+          </p>
+        </div>
+
+        <div class="project-section" style="margin-top:80px;">
+          <p class="project-section-label">02 — 使用者調查</p>
+          <h3 class="project-section-heading">痛點想法與歸類</h3>
+          <p class="project-section-body">
+            訪談結束之後，我以獨立自主加上增加心理舒適度的需求，並且以瑜珈墊為載體，發想視障者在使用瑜珈墊進行運動時會遇到的困境。以用戶需求、瑜珈的益處、市面上瑜珈課程的資料與瑜珈墊材質四大項分類
+          </p>
+        </div>
+
+      </div>
+
+      <div class="project-right-column">
+        <div class="pain-flow-wrap">
+          <p class="project-section-body" style="margin-left:130px;margin-top:121px;margin-bottom:15px;">(表一)從有動機到實際運動的人數統計
+          </p>
+          <svg id="pain-flow" viewBox="0 155 700 970" xmlns="http://www.w3.org/2000/svg" fill="none" style="width: 100%; height: auto; display: block; background: transparent;">
+<defs>
+  <clipPath id="downfill-clip">
+    <rect id="downfill-rect" x="0" y="155" width="700" height="0"/>
+  </clipPath>
+</defs>
+<g clip-path="url(#downfill-clip)">
+  <path d="M381 159V318.26C381 329.858 390.402 339.26 402 339.26H467.5C506.712 339.26 538.5 371.048 538.5 410.26V537.668H488.5V410.26C488.5 398.662 479.098 389.26 467.5 389.26H402C362.788 389.26 331 357.472 331 318.26V617.188H373C422.706 617.188 463 657.483 463 707.188V892.006H323V757.188H281C237.796 757.188 201.703 726.745 193 686.14V988H143V159H381Z" fill="#009966" fill-opacity="0.35"/>
+</g>
+<path d="M510.089 529.658C510.089 530.593 510.126 532.005 508.995 532.392C508.249 532.648 507.188 532.038 507.046 531.261C506.926 530.583 506.971 529.696 506.971 528.992L506.977 524.685C506.977 524.466 506.995 522.286 506.921 522.221C506.2 521.581 505.493 521.504 505.474 520.334C505.428 517.447 505.483 514.57 505.458 511.681C505.431 510.543 505.995 509.072 506.785 508.263C507.332 507.703 508.521 507.056 509.312 506.988C510.457 506.889 511.763 506.935 512.927 506.938C515.427 506.946 517.466 508.902 517.524 511.384C517.567 514.225 517.513 517.07 517.534 519.911C517.497 520.571 517.509 521.08 516.966 521.549C516.848 521.651 516.053 522.154 516.05 522.213C515.966 524.28 516.073 526.388 516.03 528.453C516.006 529.622 516.276 531.165 515.441 532.083C514.867 532.694 513.87 532.461 513.351 531.913C513.25 531.805 513.152 531.695 513.057 531.582C513.022 531.384 512.985 531.102 512.903 530.927C512.934 530.511 512.884 529.157 512.84 528.759C512.875 528.524 512.705 527.127 512.668 526.807L512.665 527.08C512.531 526.42 512.564 525.752 512.478 525.077C512.464 524.437 512.33 521.059 512.076 520.631C511.822 520.444 511.283 520.516 510.954 520.509C510.499 521.903 510.598 524.1 510.501 525.598C510.479 525.937 510.43 526.914 510.446 527.189L510.372 527.143C510.306 527.252 510.319 527.318 510.318 527.446C510.204 527.305 510.198 527.157 510.156 526.984C510.141 527.234 510.029 528.457 510.1 528.602C510.098 528.818 510.069 529.5 510.089 529.658Z" fill="#F0EFED"/>
+<path d="M510.904 495.034C513.37 494.714 515.635 496.427 515.975 498.868C516.315 501.309 514.602 503.564 512.14 503.917C509.654 504.274 507.349 502.557 507.006 500.092C506.663 497.627 508.413 495.357 510.904 495.034Z" fill="#F0EFED"/>
+<path d="M166.089 981.658C166.089 982.593 166.126 984.005 164.995 984.392C164.249 984.648 163.188 984.038 163.045 983.261C162.926 982.583 162.971 981.696 162.971 980.992L162.977 976.685C162.977 976.466 162.995 974.286 162.921 974.221C162.2 973.581 161.493 973.504 161.474 972.334C161.428 969.447 161.483 966.57 161.458 963.681C161.431 962.543 161.995 961.072 162.785 960.263C163.332 959.703 164.521 959.056 165.312 958.988C166.457 958.889 167.763 958.935 168.927 958.938C171.427 958.946 173.466 960.902 173.524 963.384C173.567 966.225 173.513 969.07 173.534 971.911C173.497 972.571 173.509 973.08 172.966 973.549C172.848 973.651 172.053 974.154 172.05 974.213C171.965 976.28 172.073 978.388 172.03 980.453C172.006 981.622 172.276 983.165 171.441 984.083C170.867 984.694 169.87 984.461 169.351 983.913C169.25 983.805 169.152 983.695 169.057 983.582C169.022 983.384 168.985 983.102 168.903 982.927C168.934 982.511 168.884 981.157 168.84 980.759C168.875 980.524 168.705 979.127 168.668 978.807L168.665 979.08C168.531 978.42 168.564 977.752 168.478 977.077C168.464 976.437 168.33 973.059 168.076 972.631C167.822 972.444 167.283 972.516 166.954 972.509C166.499 973.903 166.598 976.1 166.501 977.598C166.479 977.937 166.43 978.914 166.446 979.189L166.372 979.143C166.306 979.252 166.319 979.318 166.318 979.446C166.204 979.305 166.198 979.157 166.156 978.984C166.141 979.234 166.029 980.457 166.1 980.602C166.098 980.818 166.069 981.5 166.089 981.658Z" fill="#1A1A1A"/>
+<path d="M166.904 947.034C169.37 946.714 171.635 948.427 171.975 950.868C172.315 953.309 170.602 955.564 168.14 955.917C165.654 956.274 163.349 954.557 163.006 952.092C162.663 949.627 164.413 947.357 166.904 947.034Z" fill="#1A1A1A"/>
+<path d="M173.089 198.658C173.089 199.593 173.126 201.005 171.995 201.392C171.249 201.648 170.188 201.038 170.045 200.261C169.926 199.583 169.971 198.696 169.971 197.992L169.977 193.685C169.977 193.466 169.995 191.286 169.921 191.221C169.2 190.581 168.493 190.504 168.474 189.334C168.428 186.447 168.483 183.57 168.458 180.681C168.431 179.543 168.995 178.072 169.785 177.263C170.332 176.703 171.521 176.056 172.312 175.988C173.457 175.889 174.763 175.935 175.927 175.938C178.427 175.946 180.466 177.902 180.524 180.384C180.567 183.225 180.513 186.07 180.534 188.911C180.497 189.571 180.509 190.08 179.966 190.549C179.848 190.651 179.053 191.154 179.05 191.213C178.965 193.28 179.073 195.388 179.03 197.453C179.006 198.622 179.276 200.165 178.441 201.083C177.867 201.694 176.87 201.461 176.351 200.913C176.25 200.805 176.152 200.695 176.057 200.582C176.022 200.384 175.985 200.102 175.903 199.927C175.934 199.511 175.884 198.157 175.84 197.759C175.875 197.524 175.705 196.127 175.668 195.807L175.665 196.08C175.531 195.42 175.564 194.752 175.478 194.077C175.464 193.437 175.33 190.059 175.076 189.631C174.822 189.444 174.283 189.516 173.954 189.509C173.499 190.903 173.598 193.1 173.501 194.598C173.479 194.937 173.43 195.914 173.446 196.189L173.372 196.143C173.306 196.252 173.319 196.318 173.318 196.446C173.204 196.305 173.198 196.157 173.156 195.984C173.141 196.234 173.029 197.457 173.1 197.602C173.098 197.818 173.069 198.5 173.089 198.658Z" fill="#1A1A1A"/>
+<path d="M173.904 164.034C176.37 163.714 178.635 165.427 178.975 167.868C179.315 170.309 177.602 172.564 175.14 172.917C172.654 173.274 170.349 171.557 170.006 169.092C169.663 166.627 171.413 164.357 173.904 164.034Z" fill="#1A1A1A"/>
+<path d="M216.089 198.658C216.089 199.593 216.126 201.005 214.995 201.392C214.249 201.648 213.188 201.038 213.045 200.261C212.926 199.583 212.971 198.696 212.971 197.992L212.977 193.685C212.977 193.466 212.995 191.286 212.921 191.221C212.2 190.581 211.493 190.504 211.474 189.334C211.428 186.447 211.483 183.57 211.458 180.681C211.431 179.543 211.995 178.072 212.785 177.263C213.332 176.703 214.521 176.056 215.312 175.988C216.457 175.889 217.763 175.935 218.927 175.938C221.427 175.946 223.466 177.902 223.524 180.384C223.567 183.225 223.513 186.07 223.534 188.911C223.497 189.571 223.509 190.08 222.966 190.549C222.848 190.651 222.053 191.154 222.05 191.213C221.965 193.28 222.073 195.388 222.03 197.453C222.006 198.622 222.276 200.165 221.441 201.083C220.867 201.694 219.87 201.461 219.351 200.913C219.25 200.805 219.152 200.695 219.057 200.582C219.022 200.384 218.985 200.102 218.903 199.927C218.934 199.511 218.884 198.157 218.84 197.759C218.875 197.524 218.705 196.127 218.668 195.807L218.665 196.08C218.531 195.42 218.564 194.752 218.478 194.077C218.464 193.437 218.33 190.059 218.076 189.631C217.822 189.444 217.283 189.516 216.954 189.509C216.499 190.903 216.598 193.1 216.501 194.598C216.479 194.937 216.43 195.914 216.446 196.189L216.372 196.143C216.306 196.252 216.319 196.318 216.318 196.446C216.204 196.305 216.198 196.157 216.156 195.984C216.141 196.234 216.029 197.457 216.1 197.602C216.098 197.818 216.069 198.5 216.089 198.658Z" fill="#1A1A1A"/>
+<path d="M216.904 164.034C219.37 163.714 221.635 165.427 221.975 167.868C222.315 170.309 220.602 172.564 218.14 172.917C215.654 173.274 213.349 171.557 213.006 169.092C212.663 166.627 214.413 164.357 216.904 164.034Z" fill="#1A1A1A"/>
+<path d="M259.089 198.658C259.089 199.593 259.126 201.005 257.995 201.392C257.249 201.648 256.188 201.038 256.045 200.261C255.926 199.583 255.971 198.696 255.971 197.992L255.977 193.685C255.977 193.466 255.995 191.286 255.921 191.221C255.2 190.581 254.493 190.504 254.474 189.334C254.428 186.447 254.483 183.57 254.458 180.681C254.431 179.543 254.995 178.072 255.785 177.263C256.332 176.703 257.521 176.056 258.312 175.988C259.457 175.889 260.763 175.935 261.927 175.938C264.427 175.946 266.466 177.902 266.524 180.384C266.567 183.225 266.513 186.07 266.534 188.911C266.497 189.571 266.509 190.08 265.966 190.549C265.848 190.651 265.053 191.154 265.05 191.213C264.965 193.28 265.073 195.388 265.03 197.453C265.006 198.622 265.276 200.165 264.441 201.083C263.867 201.694 262.87 201.461 262.351 200.913C262.25 200.805 262.152 200.695 262.057 200.582C262.022 200.384 261.985 200.102 261.903 199.927C261.934 199.511 261.884 198.157 261.84 197.759C261.875 197.524 261.705 196.127 261.668 195.807L261.665 196.08C261.531 195.42 261.564 194.752 261.478 194.077C261.464 193.437 261.33 190.059 261.076 189.631C260.822 189.444 260.283 189.516 259.954 189.509C259.499 190.903 259.598 193.1 259.501 194.598C259.479 194.937 259.43 195.914 259.446 196.189L259.372 196.143C259.306 196.252 259.319 196.318 259.318 196.446C259.204 196.305 259.198 196.157 259.156 195.984C259.141 196.234 259.029 197.457 259.1 197.602C259.098 197.818 259.069 198.5 259.089 198.658Z" fill="#1A1A1A"/>
+<path d="M259.904 164.034C262.37 163.714 264.635 165.427 264.975 167.868C265.315 170.309 263.602 172.564 261.14 172.917C258.654 173.274 256.349 171.557 256.006 169.092C255.663 166.627 257.413 164.357 259.904 164.034Z" fill="#1A1A1A"/>
+<path d="M302.089 198.658C302.089 199.593 302.126 201.005 300.995 201.392C300.249 201.648 299.188 201.038 299.046 200.261C298.926 199.583 298.971 198.696 298.971 197.992L298.977 193.685C298.977 193.466 298.995 191.286 298.921 191.221C298.2 190.581 297.493 190.504 297.474 189.334C297.428 186.447 297.483 183.57 297.458 180.681C297.431 179.543 297.995 178.072 298.785 177.263C299.332 176.703 300.521 176.056 301.312 175.988C302.457 175.889 303.763 175.935 304.927 175.938C307.427 175.946 309.466 177.902 309.524 180.384C309.567 183.225 309.513 186.07 309.534 188.911C309.497 189.571 309.509 190.08 308.966 190.549C308.848 190.651 308.053 191.154 308.05 191.213C307.966 193.28 308.073 195.388 308.03 197.453C308.006 198.622 308.276 200.165 307.441 201.083C306.867 201.694 305.87 201.461 305.351 200.913C305.25 200.805 305.152 200.695 305.057 200.582C305.022 200.384 304.985 200.102 304.903 199.927C304.934 199.511 304.884 198.157 304.84 197.759C304.875 197.524 304.705 196.127 304.668 195.807L304.665 196.08C304.531 195.42 304.564 194.752 304.478 194.077C304.464 193.437 304.33 190.059 304.076 189.631C303.822 189.444 303.283 189.516 302.954 189.509C302.499 190.903 302.598 193.1 302.501 194.598C302.479 194.937 302.43 195.914 302.446 196.189L302.372 196.143C302.306 196.252 302.319 196.318 302.318 196.446C302.204 196.305 302.198 196.157 302.156 195.984C302.141 196.234 302.029 197.457 302.1 197.602C302.098 197.818 302.069 198.5 302.089 198.658Z" fill="#1A1A1A"/>
+<path d="M302.904 164.034C305.37 163.714 307.635 165.427 307.975 167.868C308.315 170.309 306.602 172.564 304.14 172.917C301.654 173.274 299.349 171.557 299.006 169.092C298.663 166.627 300.413 164.357 302.904 164.034Z" fill="#1A1A1A"/>
+<path d="M345.089 198.658C345.089 199.593 345.126 201.005 343.995 201.392C343.249 201.648 342.188 201.038 342.046 200.261C341.926 199.583 341.971 198.696 341.971 197.992L341.977 193.685C341.977 193.466 341.995 191.286 341.921 191.221C341.2 190.581 340.493 190.504 340.474 189.334C340.428 186.447 340.483 183.57 340.458 180.681C340.431 179.543 340.995 178.072 341.785 177.263C342.332 176.703 343.521 176.056 344.312 175.988C345.457 175.889 346.763 175.935 347.927 175.938C350.427 175.946 352.466 177.902 352.524 180.384C352.567 183.225 352.513 186.07 352.534 188.911C352.497 189.571 352.509 190.08 351.966 190.549C351.848 190.651 351.053 191.154 351.05 191.213C350.966 193.28 351.073 195.388 351.03 197.453C351.006 198.622 351.276 200.165 350.441 201.083C349.867 201.694 348.87 201.461 348.351 200.913C348.25 200.805 348.152 200.695 348.057 200.582C348.022 200.384 347.985 200.102 347.903 199.927C347.934 199.511 347.884 198.157 347.84 197.759C347.875 197.524 347.705 196.127 347.668 195.807L347.665 196.08C347.531 195.42 347.564 194.752 347.478 194.077C347.464 193.437 347.33 190.059 347.076 189.631C346.822 189.444 346.283 189.516 345.954 189.509C345.499 190.903 345.598 193.1 345.501 194.598C345.479 194.937 345.43 195.914 345.446 196.189L345.372 196.143C345.306 196.252 345.319 196.318 345.318 196.446C345.204 196.305 345.198 196.157 345.156 195.984C345.141 196.234 345.029 197.457 345.1 197.602C345.098 197.818 345.069 198.5 345.089 198.658Z" fill="#1A1A1A"/>
+<path d="M345.904 164.034C348.37 163.714 350.635 165.427 350.975 167.868C351.315 170.309 349.602 172.564 347.14 172.917C344.654 173.274 342.349 171.557 342.006 169.092C341.663 166.627 343.413 164.357 345.904 164.034Z" fill="#1A1A1A"/>
+<path d="M345.089 883.658C345.089 884.593 345.126 886.005 343.995 886.392C343.249 886.648 342.188 886.038 342.046 885.261C341.926 884.583 341.971 883.696 341.971 882.992L341.977 878.685C341.977 878.466 341.995 876.286 341.921 876.221C341.2 875.581 340.493 875.504 340.474 874.334C340.428 871.447 340.483 868.57 340.458 865.681C340.431 864.543 340.995 863.072 341.785 862.263C342.332 861.703 343.521 861.056 344.312 860.988C345.457 860.889 346.763 860.935 347.927 860.938C350.427 860.946 352.466 862.902 352.524 865.384C352.567 868.225 352.513 871.07 352.534 873.911C352.497 874.571 352.509 875.08 351.966 875.549C351.848 875.651 351.053 876.154 351.05 876.213C350.966 878.28 351.073 880.388 351.03 882.453C351.006 883.622 351.276 885.165 350.441 886.083C349.867 886.694 348.87 886.461 348.351 885.913C348.25 885.805 348.152 885.695 348.057 885.582C348.022 885.384 347.985 885.102 347.903 884.927C347.934 884.511 347.884 883.157 347.84 882.759C347.875 882.524 347.705 881.127 347.668 880.807L347.665 881.08C347.531 880.42 347.564 879.752 347.478 879.077C347.464 878.437 347.33 875.059 347.076 874.631C346.822 874.444 346.283 874.516 345.954 874.509C345.499 875.903 345.598 878.1 345.501 879.598C345.479 879.937 345.43 880.914 345.446 881.189L345.372 881.143C345.306 881.252 345.319 881.318 345.318 881.446C345.204 881.305 345.198 881.157 345.156 880.984C345.141 881.234 345.029 882.457 345.1 882.602C345.098 882.818 345.069 883.5 345.089 883.658Z" fill="#F0EFED"/>
+<path d="M345.904 849.034C348.37 848.714 350.635 850.427 350.975 852.868C351.315 855.309 349.602 857.564 347.14 857.917C344.654 858.274 342.349 856.557 342.006 854.092C341.663 851.627 343.413 849.357 345.904 849.034Z" fill="#F0EFED"/>
+<path d="M389.089 883.658C389.089 884.593 389.126 886.005 387.995 886.392C387.249 886.648 386.188 886.038 386.046 885.261C385.926 884.583 385.971 883.696 385.971 882.992L385.977 878.685C385.977 878.466 385.995 876.286 385.921 876.221C385.2 875.581 384.493 875.504 384.474 874.334C384.428 871.447 384.483 868.57 384.458 865.681C384.431 864.543 384.995 863.072 385.785 862.263C386.332 861.703 387.521 861.056 388.312 860.988C389.457 860.889 390.763 860.935 391.927 860.938C394.427 860.946 396.466 862.902 396.524 865.384C396.567 868.225 396.513 871.07 396.534 873.911C396.497 874.571 396.509 875.08 395.966 875.549C395.848 875.651 395.053 876.154 395.05 876.213C394.966 878.28 395.073 880.388 395.03 882.453C395.006 883.622 395.276 885.165 394.441 886.083C393.867 886.694 392.87 886.461 392.351 885.913C392.25 885.805 392.152 885.695 392.057 885.582C392.022 885.384 391.985 885.102 391.903 884.927C391.934 884.511 391.884 883.157 391.84 882.759C391.875 882.524 391.705 881.127 391.668 880.807L391.665 881.08C391.531 880.42 391.564 879.752 391.478 879.077C391.464 878.437 391.33 875.059 391.076 874.631C390.822 874.444 390.283 874.516 389.954 874.509C389.499 875.903 389.598 878.1 389.501 879.598C389.479 879.937 389.43 880.914 389.446 881.189L389.372 881.143C389.306 881.252 389.319 881.318 389.318 881.446C389.204 881.305 389.198 881.157 389.156 880.984C389.141 881.234 389.029 882.457 389.1 882.602C389.098 882.818 389.069 883.5 389.089 883.658Z" fill="#F0EFED"/>
+<path d="M389.904 849.034C392.37 848.714 394.635 850.427 394.975 852.868C395.315 855.309 393.602 857.564 391.14 857.917C388.654 858.274 386.349 856.557 386.006 854.092C385.663 851.627 387.413 849.357 389.904 849.034Z" fill="#F0EFED"/>
+<path d="M433.089 883.658C433.089 884.593 433.126 886.005 431.995 886.392C431.249 886.648 430.188 886.038 430.046 885.261C429.926 884.583 429.971 883.696 429.971 882.992L429.977 878.685C429.977 878.466 429.995 876.286 429.921 876.221C429.2 875.581 428.493 875.504 428.474 874.334C428.428 871.447 428.483 868.57 428.458 865.681C428.431 864.543 428.995 863.072 429.785 862.263C430.332 861.703 431.521 861.056 432.312 860.988C433.457 860.889 434.763 860.935 435.927 860.938C438.427 860.946 440.466 862.902 440.524 865.384C440.567 868.225 440.513 871.07 440.534 873.911C440.497 874.571 440.509 875.08 439.966 875.549C439.848 875.651 439.053 876.154 439.05 876.213C438.966 878.28 439.073 880.388 439.03 882.453C439.006 883.622 439.276 885.165 438.441 886.083C437.867 886.694 436.87 886.461 436.351 885.913C436.25 885.805 436.152 885.695 436.057 885.582C436.022 885.384 435.985 885.102 435.903 884.927C435.934 884.511 435.884 883.157 435.84 882.759C435.875 882.524 435.705 881.127 435.668 880.807L435.665 881.08C435.531 880.42 435.564 879.752 435.478 879.077C435.464 878.437 435.33 875.059 435.076 874.631C434.822 874.444 434.283 874.516 433.954 874.509C433.499 875.903 433.598 878.1 433.501 879.598C433.479 879.937 433.43 880.914 433.446 881.189L433.372 881.143C433.306 881.252 433.319 881.318 433.318 881.446C433.204 881.305 433.198 881.157 433.156 880.984C433.141 881.234 433.029 882.457 433.1 882.602C433.098 882.818 433.069 883.5 433.089 883.658Z" fill="#F0EFED"/>
+<path d="M433.904 849.034C436.37 848.714 438.635 850.427 438.975 852.868C439.315 855.309 437.602 857.564 435.14 857.917C432.654 858.274 430.349 856.557 430.006 854.092C429.663 851.627 431.413 849.357 433.904 849.034Z" fill="#F0EFED"/>
+<path d="M129 538.5C129 540.709 130.791 542.5 133 542.5C135.209 542.5 137 540.709 137 538.5C137 536.291 135.209 534.5 133 534.5C130.791 534.5 129 536.291 129 538.5ZM97 538.5H96.25V539.25H97V538.5ZM97 161V160.25H96.25V161H97ZM129 161C129 163.209 130.791 165 133 165C135.209 165 137 163.209 137 161C137 158.791 135.209 157 133 157C130.791 157 129 158.791 129 161ZM133 538.5V537.75H97V538.5V539.25H133V538.5ZM97 538.5H97.75V161H97H96.25V538.5H97ZM97 161V161.75H133V161V160.25H97V161Z" fill="#1A1A1A"/>
+<path d="M130 903C130 905.209 131.791 907 134 907C136.209 907 138 905.209 138 903C138 900.791 136.209 899 134 899C131.791 899 130 900.791 130 903ZM97 903H96.25V903.75H97V903ZM97.75 539V538.25H96.25V539H97H97.75ZM134 903V902.25H97V903V903.75H134V903ZM97 903H97.75V539H97H96.25V903H97Z" fill="#1A1A1A"/>
+<path d="M130 983C130 985.209 131.791 987 134 987C136.209 987 138 985.209 138 983C138 980.791 136.209 979 134 979C131.791 979 130 980.791 130 983ZM97 983H96.25V983.75H97V983ZM97.75 902V901.25H96.25V902H97H97.75ZM134 983V982.25H97V983V983.75H134V983ZM97 983H97.75V902H97H96.25V983H97Z" fill="#1A1A1A"/>
+
+<defs>
+  <style>
+    .pf-vert {
+      font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+      font-weight: 400;
+      font-size: 24px;
+      fill: #1a1a1a;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.05em;
+    }
+    .pf-text {
+      font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+      font-weight: 400;
+      font-size: 24px;
+      fill: #1a1a1a;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</defs>
+
+<!-- Left vertical stage labels (between the three bullets) -->
+<text x="70" y="200" class="pf-vert">缺乏人員引導與教學</text>
+<text x="70" y="570" class="pf-vert">缺乏自主運動的能力</text>
+<text x="70" y="900" class="pf-vert">執行成功</text>
+
+<!-- Right-side annotations (counts / dropout reasons) -->
+<text x="385" y="190" class="pf-text">10人參與研究</text>
+
+<text x="489" y="565" class="pf-text">20%參與者</text>
+<text x="489" y="600" class="pf-text">不知道要做</text>
+<text x="489" y="635" class="pf-text">什麼運動</text>
+
+<text x="323" y="920" class="pf-text">60%參與者</text>
+<text x="323" y="955" class="pf-text">不想麻煩別人</text>
+
+<!-- Caption under the lone black icon (bottom-left) -->
+<text x="142" y="1015" class="pf-text">20%參與者</text>
+<text x="142" y="1050" class="pf-text">成功執行運動</text>
+</svg>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="split-layout reveal" style="margin-top:20px;">
+      <div>
+        <h3 class="project-section-heading">使用者痛點分析</h3>
+        <p class="project-section-body">
+          將痛分類整理成身體、心理、課程、器材四大分類。 我重新連絡受訪者，詢問那些痛點的影響力比較嚴重。 得到痛點的重要性之後，我重新評估解決各個痛點所需要的時間與難度。 最後選定以器材-瑜珈墊的問題出發，用瑜珈墊解決視障者進行獨立運動時感受到的不安感與不確定性。
+        </p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <svg viewBox="0 0 1400 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;background:transparent;">
+  <defs>
+    <style>
+      .pp-center { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size:38px; fill: #1a1a1a; }
+      .pp-cat-en { font-family: 'Roboto Condensed', sans-serif; font-weight: 900; font-size:38px; letter-spacing: 0.22em; fill: #999999; }
+      .pp-cat-cn { font-family: 'Noto Serif TC', serif; font-weight: 700; font-size:38px; fill: #1a1a1a; }
+      .pp-stroke { fill: none; stroke: #1a1a1a; stroke-width: 1.5; }
+      .pp-branch { fill: none; stroke: #c8c8c8; stroke-width: 1; }
+    </style>
+  </defs>
+  <ellipse cx="180" cy="250" rx="100" ry="58" class="pp-stroke"/>
+  <text x="180" y="263" text-anchor="middle" class="pp-center">痛點</text>
+  <path d="M 280 232 C 600 110 900 95 1100 95" class="pp-branch"/>
+  <path d="M 280 244 C 600 230 900 218 1100 215" class="pp-branch"/>
+  <path d="M 280 256 C 600 320 900 332 1100 335" class="pp-branch"/>
+  <path d="M 280 268 C 600 440 900 455 1100 455" class="pp-branch"/>
+  <text x="1120" y="75" class="pp-cat-en">PSYCHOLOGICAL</text>
+  <text x="1120" y="125" class="pp-cat-cn">心理問題</text>
+  <text x="1120" y="195" class="pp-cat-en">COURSE</text>
+  <text x="1120" y="245" class="pp-cat-cn">課程問題</text>
+  <text x="1120" y="315" class="pp-cat-en">BODY</text>
+  <text x="1120" y="365" class="pp-cat-cn">身體問題</text>
+  <text x="1120" y="435" class="pp-cat-en">EQUIPMENT</text>
+  <text x="1120" y="485" class="pp-cat-cn">器材問題</text>
+</svg>
+
+      </div>
+</div>
+    <div style="margin-top:80px;">
+      <div class="tools-grid reveal">
+        <button class="tool-tag active" data-filter="all">ALL</button>
+        <button class="tool-tag" data-filter="psych">PSYCHOLOGICAL</button>
+        <button class="tool-tag" data-filter="physical">PHYSICAL</button>
+        <button class="tool-tag" data-filter="course">COURSE</button>
+        <button class="tool-tag" data-filter="equip">EQUIPMENT</button>
+      </div>
+
+      <div class="chart-frame reveal">
+        <div class="y-axis-title">
+          <span class="y-axis-rotated">
+            <span class="axis-cn">難度</span>
+            <span class="axis-eng">DIFFICULTY</span>
+          </span>
+        </div>
+
+        <div class="chart-cell">
+          <div class="cross-wrap" id="chart">
+            <div class="axis-h"></div>
+            <div class="axis-v"></div>
+
+            <div class="grey-line" style="left: 0; right: 0; top: 8%; height: 1px;"></div>
+            <div class="grey-line" style="left: 0; right: 62%; top: 75%; height: 1px;"></div>
+            <div class="grey-line" style="top: 6%; bottom: 6%; left: 8%; width: 1px;"></div>
+            <div class="grey-line" style="top: 6%; bottom: 6%; left: 38%; width: 1px;"></div>
+
+            <div class="corner-label corner-tl" data-cat="psych">
+              <span class="corner-cn">心理問題</span>
+            </div>
+            <div class="corner-label corner-tr" data-cat="course">
+              <span class="corner-cn">課程問題</span>
+            </div>
+            <div class="corner-label corner-bl" data-cat="physical">
+              <span class="corner-cn">身體問題</span>
+            </div>
+            <div class="corner-label corner-br" data-cat="equip">
+              <span class="corner-cn">器材問題</span>
+            </div>
+
+            <div class="x-axis-title">
+              <span class="axis-cn">影響力</span>
+              <span class="axis-eng">IMPACT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-section reveal" style="margin-top:80px;">
+      <p class="project-section-label">03 — 使用者旅程地圖</p>
+      <h3 class="project-section-heading">瑜珈課程中的情緒歷程</h3>
+      <p class="project-section-body">透過 User Journey Map 得到使用者最頭痛的點多半在進行主課程的時候，最讓使用者不舒服的地方為找不到方向，沒辦法定位。</p>
+      <div class="img-full">
+      <style>
+        .journey-wrap { overflow-x: auto; margin-top: 20px; position: relative; }
+        .journey-table {
+          width: 100%; border-collapse: collapse; table-layout: fixed;
+          font-family: 'Noto Serif TC', serif;
+        }
+        .journey-table .row-label {
+          font-family: 'Roboto Condensed', sans-serif; font-weight: 900;
+          font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase;
+          color: var(--light-grey); text-align: left;
+          padding: 20px 16px 20px 0; width: 80px; min-width: 80px;
+          vertical-align: top; border-top: 1px solid var(--border); white-space: nowrap;
+        }
+        .journey-table .group-header {
+          font-family: 'Roboto Condensed', sans-serif; font-weight: 900;
+          font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+          color: var(--grey); text-align: left; padding: 0 0 12px 12px;
+          border-bottom: 1px solid var(--black);
+        }
+        .journey-table .group-header span {
+          display: block; font-weight: 400; font-size: 10px;
+          color: var(--light-grey); margin-top: 2px; letter-spacing: 0.15em;
+        }
+        .journey-table .stage-cell {
+          font-family: 'Noto Serif TC', serif; font-size: 14px; font-weight: 700;
+          color: var(--black); padding: 16px 12px; vertical-align: top;
+          border-top: 1px solid var(--black); border-left: 1px solid var(--border); line-height: 1.5;
+        }
+        .journey-table .stage-cell span {
+          display: block; font-family: 'Roboto Condensed', sans-serif;
+          font-size: 11px; letter-spacing: 0.15em; color: var(--grey);
+          font-weight: 400; margin-top: 4px;
+        }
+        .journey-table td.data-cell {
+          font-family: 'Noto Serif TC', serif; font-size: 13px; color: var(--grey);
+          padding: 16px 12px; vertical-align: top;
+          border-top: 1px solid var(--border); border-left: 1px solid var(--border); line-height: 1.8;
+        }
+        .journey-table td.data-cell.empty { color: var(--light-grey); }
+        .journey-table tr:last-child td, .journey-table tr:last-child th { border-bottom: 1px solid var(--border); }
+        .journey-table .stage-cell, .journey-table .data-cell { opacity: 0; }
+        .journey-wrap.animate .stage-cell, .journey-wrap.animate .data-cell {
+          animation: jt-reveal 0.5s ease forwards;
+          animation-delay: calc(var(--col) * 80ms);
+        }
+        @keyframes jt-reveal {
+          from { opacity: 0; transform: translateX(-18px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+      </style>
+      <div class="journey-wrap" id="journeyWrap">
+        <table class="journey-table">
+          <thead>
+            <tr>
+              <th class="row-label"></th>
+              <th colspan="3" class="group-header">暖身與連結<span>20 MIN</span></th>
+              <th colspan="5" class="group-header">主課程 — 根基與平衡<span>60 MIN</span></th>
+              <th colspan="2" class="group-header">收操與深層修復<span>20 MIN</span></th>
+            </tr>
+            <tr>
+              <th class="row-label">階段</th>
+              <td class="stage-cell" style="--col:1">環境定向<br>與坐姿安頓<span>5 min</span></td>
+              <td class="stage-cell" style="--col:2">呼吸覺察<span>5 min</span></td>
+              <td class="stage-cell" style="--col:3">關節釋放<span>10 min</span></td>
+              <td class="stage-cell" style="--col:4">山式 Tadasana<span>10 min</span></td>
+              <td class="stage-cell" style="--col:5">樹式 Tree Pose<span>15 min</span></td>
+              <td class="stage-cell" style="--col:6">勇士二式 Warrior II<span>15 min</span></td>
+              <td class="stage-cell" style="--col:7">貓牛式 &amp; 嬰兒式<span>10 min</span></td>
+              <td class="stage-cell" style="--col:8">坐姿扭轉<span>10 min</span></td>
+              <td class="stage-cell" style="--col:9">仰躺伸展<span>5 min</span></td>
+              <td class="stage-cell" style="--col:10">大休息 Savasana<span>15 min</span></td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="row-label">動作</th>
+              <td class="data-cell" style="--col:1">簡易坐（Sukhasana）或坐在椅子上（若髖部緊繃）</td>
+              <td class="data-cell" style="--col:2">腹式呼吸。手掌輕貼腹部。</td>
+              <td class="data-cell" style="--col:3">頸部緩慢轉動、肩膀畫圓、手腕轉動、脊椎暖身（坐姿貓牛式）。</td>
+              <td class="data-cell" style="--col:4">雙腳併攏或與骨盆同寬站立，背部輕靠牆。</td>
+              <td class="data-cell" style="--col:5">一手扶牆或椅背。將一腳重心踩穩，另一腳跟輕靠腳踝（初階）或踩在小腿內側。</td>
+              <td class="data-cell" style="--col:6">雙腳打開，前腳彎曲，後腳伸直。可跨坐在椅子上執行以確保方向感不迷失。</td>
+              <td class="data-cell" style="--col:7">四足跪姿（手掌在肩膀下，膝蓋在骨盆下）。</td>
+              <td class="data-cell" style="--col:8">簡易坐姿，一手放在對側膝蓋，一手放在身後地板。</td>
+              <td class="data-cell" style="--col:9">放鬆下背部</td>
+              <td class="data-cell" style="--col:10">平躺，手腳自然攤開。</td>
+            </tr>
+            <tr>
+              <th class="row-label">感受</th>
+              <td class="data-cell" style="--col:1">從焦慮轉為謹慎的安穩。剛進教室時的未知恐懼稍微緩解。</td>
+              <td class="data-cell" style="--col:2">專注與寧靜。</td>
+              <td class="data-cell" style="--col:3">釋放但帶點困惑。</td>
+              <td class="data-cell" style="--col:4">困惑感。</td>
+              <td class="data-cell" style="--col:5">緊張與挫折。</td>
+              <td class="data-cell" style="--col:6">拿回身體主導權的感覺。</td>
+              <td class="data-cell" style="--col:7">安心。</td>
+              <td class="data-cell" style="--col:8">舒服帶有困惑。</td>
+              <td class="data-cell" style="--col:9">放鬆。</td>
+              <td class="data-cell" style="--col:10">平靜。</td>
+            </tr>
+            <tr>
+              <th class="row-label">體驗</th>
+              <td class="data-cell empty" style="--col:1">—</td>
+              <td class="data-cell" style="--col:2">這是我最熟悉的「向內看」的方式。因為看不見外界，我對身體內部的脹縮感特別敏銳。</td>
+              <td class="data-cell" style="--col:3">轉動脖子時聽到細微的骨骼聲。當老師說「肩膀畫圓」時，我努力用本體感覺去想像圓的形狀。</td>
+              <td class="data-cell" style="--col:4">背部接觸到冰涼堅硬的牆壁，這給我極大的「實體回饋」。</td>
+              <td class="data-cell" style="--col:5">單腳站立時，腳踝劇烈晃動。</td>
+              <td class="data-cell empty" style="--col:6">—</td>
+              <td class="data-cell" style="--col:7">四足跪姿讓我有四個支撐點，很穩。</td>
+              <td class="data-cell" style="--col:8">我其實不知道我的脊椎是「垂直地板」還是「向後傾斜」，轉頭看後方是要轉到 90° 還是 180°？</td>
+              <td class="data-cell" style="--col:9">抓腳的時候，我必須先摸到膝蓋、小腿，順藤摸瓜才能找到腳掌。</td>
+              <td class="data-cell" style="--col:10">這跟我平常做的「內觀」或「冥想」很像。</td>
+            </tr>
+            <tr>
+              <th class="row-label">痛點</th>
+              <td class="data-cell" style="--col:1">我不知道老師在哪裡，也不知道門在哪個方向。</td>
+              <td class="data-cell empty" style="--col:2">—</td>
+              <td class="data-cell" style="--col:3">「順時針」或「逆時針」需要多花幾秒鐘思考。不確定頭是否「回正」了。</td>
+              <td class="data-cell" style="--col:4">雖然有牆，但不知道腳是不是平行的。</td>
+              <td class="data-cell" style="--col:5">即便有牆，還是不敢把腳抬太高，很怕滑倒。</td>
+              <td class="data-cell" style="--col:6">不知道手有沒有舉平。</td>
+              <td class="data-cell empty" style="--col:7">—</td>
+              <td class="data-cell empty" style="--col:8">—</td>
+              <td class="data-cell empty" style="--col:9">—</td>
+              <td class="data-cell empty" style="--col:10">—</td>
+            </tr>
+          </tbody>
+
+        <!-- Emotion curve overlay -->
+        <svg id="emotionCurve" viewBox="0 0 1000 110" preserveAspectRatio="none" opacity="0.6"
+          xmlns="http://www.w3.org/2000/svg"
+          style="position:absolute;left:80px;top:0;width:calc(100% - 80px);height:100%;z-index:0;pointer-events:none;overflow:visible;">
+          <defs>
+            <linearGradient id="ec-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fcb21c" stop-opacity="0.45"/>
+              <stop offset="1" stop-color="#fcb21c" stop-opacity="0"/>
+            </linearGradient>
+            <clipPath id="ec-clip">
+              <rect id="ec-clip-rect" x="0" y="-10" width="0" height="130"/>
+            </clipPath>
+            <clipPath id="hl-clip">
+              <rect id="hl-clip-rect" x="300" y="0" width="0" height="110"/>
+            </clipPath>
+          </defs>
+          <rect id="hl-rect" x="300" y="0" width="200" height="110"
+                fill="#B20000" fill-opacity="0.35" clip-path="url(#hl-clip)"/>
+        </svg>        </table>
+      </div>
+      <script>
+      (function () {
+        var wrap = document.getElementById('journeyWrap');
+        if (!wrap) return;
+        function playAnim() {
+          wrap.classList.remove('animate');
+          void wrap.offsetWidth;
+          wrap.classList.add('animate');
+        }
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { playAnim(); obs.unobserve(e.target); }
+          });
+        }, { threshold: 0.1 });
+        obs.observe(wrap);
+        wrap.addEventListener('mouseenter', playAnim);
+      })();
+      </script>
+
+      <script>
+      /* Emotion curve drawing */
+      (function () {
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.getElementById('emotionCurve');
+        if (!svg) return;
+
+        /* Two cubic-bezier segments per mountain: horizontal tangent at both
+           the baseline and the peak, giving a smooth bell curve for each phase. */
+        var H = 108;
+        var peaks = [
+          {v:67, label:'環境定向'},
+          {v:10, label:'呼吸覺察'},
+          {v:54, label:'關節釋放'},
+          {v:70, label:'山式'},
+          {v:83, label:'樹式'},
+          {v:41, label:'勇士二式'},
+          {v:25, label:'貓牛+嬰兒'},
+          {v:38, label:'坐姿扭轉'},
+          {v:46, label:'仰躺伸展'},
+          {v:7,  label:'大休息'}
+        ];
+
+        /* Horizontal lead-in from x=0 to first peak, then zigzag to all peaks */
+        var lastV = peaks[peaks.length - 1].v;
+        var lineD = 'M 0,' + peaks[0].v + ' L 50,' + peaks[0].v;
+        peaks.slice(1).forEach(function(p, i) {
+          lineD += ' L ' + ((i + 1) * 100 + 50) + ',' + p.v;
+        });
+        lineD += ' L 1000,' + lastV;
+
+        /* Fill path closes along the baseline */
+        var pathD = 'M 0,' + H + ' L 0,' + peaks[0].v + ' L 50,' + peaks[0].v;
+        peaks.slice(1).forEach(function(p, i) {
+          pathD += ' L ' + ((i + 1) * 100 + 50) + ',' + p.v;
+        });
+        pathD += ' L 1000,' + lastV + ' L 1000,' + H + ' Z';
+
+        /* Separator lines */
+        for (var i = 1; i < 10; i++) {
+          var sep = document.createElementNS(NS, 'line');
+          sep.setAttribute('x1', i * 100); sep.setAttribute('y1', 0);
+          sep.setAttribute('x2', i * 100); sep.setAttribute('y2', 108);
+          sep.setAttribute('stroke', '#d0cfc9'); sep.setAttribute('stroke-width', '0.5');
+          svg.appendChild(sep);
+        }
+
+        /* Baseline */
+        var base = document.createElementNS(NS, 'line');
+        base.setAttribute('x1', 0); base.setAttribute('y1', 108);
+        base.setAttribute('x2', 1000); base.setAttribute('y2', 108);
+        base.setAttribute('stroke', '#d0cfc9'); base.setAttribute('stroke-width', '0.5');
+        svg.appendChild(base);
+
+        /* Filled area (clipped) */
+        var fill = document.createElementNS(NS, 'path');
+        fill.setAttribute('d', pathD);
+        fill.setAttribute('fill', 'url(#ec-grad)');
+        fill.setAttribute('clip-path', 'url(#ec-clip)');
+        svg.appendChild(fill);
+
+        /* Curve line (clipped) */
+        var curveLine = document.createElementNS(NS, 'path');
+        curveLine.setAttribute('id', 'ec-line');
+        curveLine.setAttribute('d', lineD);
+        curveLine.setAttribute('fill', 'none');
+        curveLine.setAttribute('stroke', '#eb6e31');
+        curveLine.setAttribute('stroke-width', '0.8');
+        curveLine.setAttribute('clip-path', 'url(#ec-clip)');
+        svg.appendChild(curveLine);
+
+        /* Animate the clip rect left→right using rAF */
+        var clipRect = document.getElementById('ec-clip-rect');
+        var hlClipRect = document.getElementById('hl-clip-rect');
+        var animId = null;
+        var hlAnimId = null;
+        var hlTimer = null;
+
+        function playHighlight() {
+          if (hlAnimId) cancelAnimationFrame(hlAnimId);
+          hlClipRect.setAttribute('width', '0');
+          var start = performance.now();
+          var dur = 500;
+          function step(now) {
+            var t = Math.min((now - start) / dur, 1);
+            var eased = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+            hlClipRect.setAttribute('width', String(eased * 200));
+            if (t < 1) hlAnimId = requestAnimationFrame(step);
+            else hlAnimId = null;
+          }
+          hlAnimId = requestAnimationFrame(step);
+        }
+
+        function playCurve() {
+          if (animId) cancelAnimationFrame(animId);
+          if (hlTimer) clearTimeout(hlTimer);
+          clipRect.setAttribute('width', '0');
+          hlClipRect.setAttribute('width', '0');
+          var start = performance.now();
+          var dur = 1400;
+          function step(now) {
+            var t = Math.min((now - start) / dur, 1);
+            var eased = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+            clipRect.setAttribute('width', String(eased * 1000));
+            if (t < 1) animId = requestAnimationFrame(step);
+            else { animId = null; hlTimer = setTimeout(playHighlight, 0); }
+          }
+          animId = requestAnimationFrame(step);
+        }
+
+        /* Trigger with the journey table's animate class */
+        var wrap = document.getElementById('journeyWrap');
+        if (wrap) {
+          var orig = wrap.__playAnim;
+          /* Patch mouseenter to also play curve */
+          wrap.addEventListener('mouseenter', playCurve);
+
+          /* IntersectionObserver for first view */
+          var obs2 = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { playCurve(); obs2.unobserve(e.target); }
+            });
+          }, { threshold: 0.1 });
+          obs2.observe(wrap);
+        }
+      })();
+      </script>
+      </div>
+    </div>
+
+    <div class="project-section reveal" style="margin-top:80px;">
+      <p class="project-section-label">04 — 產品介紹</p>
+      <h3 class="project-section-heading">VOGA 功能簡介</h3>
+      <div class="img-full">
+        <object data="../pictures/1x/SVG/資產 15.svg" type="image/svg+xml" style="width:100%;height:auto;display:block;"></object>
+      </div>
+      <p class="project-section-body">導引線設計的設計讓視障者透過觸覺定位身體方向。</p>
+      <div class="img-full">
+        <img src="../pictures/1x/SVG/資產 16.svg" alt="VOGA 功能介紹" style="width: 104%;">
+      </div>
+      <p class="project-section-body">增加邊界緩衝區避免視障者出界。</p>
+      <div class="img-full" style="margin-top:55px;">
+        <img src="../pictures/1x/SVG/資產 17.svg" alt="VOGA 功能介紹">
+      </div>
+      <p class="project-section-body">透過紋路讓視障者以觸覺找到中心線。</p>
+      <div class="img-full" style="margin-top:55px;">
+        <object data="../pictures/1x/SVG/資產 18.svg" type="image/svg+xml" style="width:100%;height:auto;display:block;"></object>
+      </div>
+      <p class="project-section-body">瑜珈墊中央用條紋漸層讓使用者用觸覺定位前後方向。</p>
+      <div class="img-full" style="margin-top:55px;margin-bottom:-4.9%;overflow:hidden;clip-path:inset(0 0 8% 0);">
+        <object data="../pictures/1x/SVG/資產 19.svg" type="image/svg+xml" style="width:100%;height:auto;display:block;"></object>
+      </div>
+      <p class="project-section-body" style="margin-top:0;">模具設計與脫模方向。</p>
+      <div class="img-full" style="margin-top:55px;">
+        <object data="../pictures/1x/SVG/資產 20.svg" type="image/svg+xml" style="width:100%;height:auto;display:block;"></object>
+      </div>
+      <p class="project-section-body">瑜珈墊材質：NBR 橡膠。</p>
+    </div>
+
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <p class="footer-name">Matthew Wang</p>
+    <p class="footer-sub">工業設計 · 國立成功大學 · 2026</p>
+    <p class="footer-copy">© 2026 王韋仁. 版權所有。</p>
+  </div>
+  <div class="footer-contact">
+    <span>+886 968 668 375</span>
+    <a href="mailto:F34111023@gs.ncku.edu.tw">F34111023@gs.ncku.edu.tw</a>
+    <span style="color:var(--light-grey);margin-top:8px;font-size:14px;letter-spacing:0.12em;">台南 · 台灣</span>
+  </div>
+</footer>
+
+<script>
+  const items = [
+    { id:'p1',  cat:'psych',    num:'01.01', label:'焦慮感',                                desc:'使用者在練習過程中持續感到焦慮不安，影響呼吸與專注。',                                x:24,  y:13, size:141  },
+    { id:'p2',  cat:'psych',    num:'01.02', label:'孤獨感',                                desc:'在課堂中感到自己與其他學員之間存在難以跨越的距離。',                                  x:14,  y:25, size:135  },
+    { id:'p3',  cat:'psych',    num:'01.03', label:'覺得自己是負擔',                          desc:'擔心需要他人額外協助而拖累課程節奏，產生愧疚感。',                                    x:21,  y:38, size:166 },
+    { id:'p4',  cat:'psych',    num:'01.04', label:'自我懷疑',                              desc:'無法即時確認動作正確性，導致對自身能力的懷疑。',                                      x:32,  y:45, size:132  },
+    { id:'c1',  cat:'course',   num:'02.01', label:'聽覺指令為線性的，而動作要求為同時性的', desc:'口語只能依序傳達，但體位法常需多個身體部位同時調整，造成認知瓶頸。',              x:58,  y:23, size:261 },
+    { id:'c2',  cat:'course',   num:'02.02', label:'缺乏視覺經驗參照',                       desc:'無法透過觀看他人示範動作建立內部模板。',                                              x:80,  y:11, size:166 },
+    { id:'c3',  cat:'psych',    num:'01.11', label:'不知道自己對不對',                       desc:'缺乏即時回饋管道確認動作的角度、軸線與重心。',                                        x:86,  y:23, size:160 },
+    { id:'c4',  cat:'course',   num:'02.04', label:'抽象詞彙與視覺隱喻的隔閡',                desc:'老師以「像一棵樹」「打開胸口」等視覺性比喻描述動作，難以轉譯為身體經驗。',         x:80,  y:38, size:190 },
+    { id:'p5',  cat:'physical', num:'04.01', label:'需要一次同時處理大量指令',                desc:'聽覺輸入為線性，而動作執行需多部位同步，認知負荷極高。',                              x:14,  y:55, size:197 },
+    { id:'p6',  cat:'physical', num:'04.02', label:'找不到身體方位',                          desc:'失去空間參照後，難以判斷四肢相對於身體中軸的位置。',                                  x:32,  y:60, size:153 },
+    { id:'p7',  cat:'physical', num:'04.03', label:'空間感迷失',                              desc:'對所處場域大小、形狀、邊界缺乏掌握。',                                                x:22,  y:69, size:153 },
+    { id:'p8',  cat:'psych',    num:'01.08', label:'恐懼感',                                desc:'對未知環境與潛在碰撞的長期警覺，難以放鬆身體。',                                      x:13,  y:83, size:129  },
+    { id:'p9',  cat:'psych',    num:'01.09', label:'不安感',                                desc:'即使在熟悉空間中，仍存在持續的不確定感。',                                            x:30,  y:83, size:129  },
+    { id:'p10', cat:'psych',    num:'01.10', label:'沒有邊界的恐懼',                          desc:'缺乏明確物理邊界，使移動範圍與安全區域模糊不清。',                                    x:21,  y:93, size:166 },
+    { id:'e1',  cat:'equip',    num:'03.01', label:'需要明確物理邊界來建立安全範圍',           desc:'可觸知的墊面邊界能定義「安全活動區」，降低焦慮。',                                    x:82,  y:64, size:211 },
+    { id:'e2',  cat:'equip',    num:'03.02', label:'聲音回饋不足',                            desc:'現有器材缺乏即時的聲響或語音引導，難以即時校正。',                                    x:60,  y:72, size:147  },
+    { id:'e3',  cat:'equip',    num:'03.03', label:'找不到墊子',                              desc:'進場、移動後常找不回自己的瑜珈墊位置。',                                              x:78,  y:78, size:139  },
+    { id:'e4',  cat:'equip',    num:'03.04', label:'缺乏「觸覺回饋」的瑜珈墊',                desc:'平面化的墊面無法提供位置、方向與動作的觸覺線索。',                                    x:60,  y:90, size:190 },
+    { id:'e5',  cat:'equip',    num:'03.05', label:'抓地力不足的輔具',                        desc:'輔具防滑性能不佳，影響姿勢穩定與安全。',                                              x:82,  y:88, size:175 },
+  ];
+
+  const catName = { psych: 'PSYCHOLOGICAL', physical: 'PHYSICAL', course: 'COURSE', equip: 'EQUIPMENT' };
+  const chart = document.getElementById('chart');
+  const info  = document.getElementById('info');
+
+  const FILLED_IDS      = new Set(['p1','p2','p3','p4','p8','p9','p10','c3']);
+  const FILLED_TEAL_IDS = new Set(['p5','p6','p7']);
+  const FILLED_CYAN_IDS = new Set(['c1','c2','c4']);
+  const FILLED_RED_IDS  = new Set(['e1','e2','e3','e4','e5']);
+
+  if (chart) {
+    items.forEach(d => {
+      const b = document.createElement('div');
+      let extra = '';
+      if (FILLED_IDS.has(d.id))           extra = ' filled';
+      else if (FILLED_TEAL_IDS.has(d.id)) extra = ' filled-teal';
+      else if (FILLED_CYAN_IDS.has(d.id)) extra = ' filled-cyan';
+      else if (FILLED_RED_IDS.has(d.id))  extra = ' filled-red';
+      b.className = 'bubble' + extra;
+      b.dataset.id = d.id;
+      b.dataset.cat = d.cat;
+      b.style.left   = d.x + '%';
+      b.style.top    = d.y + '%';
+      b.style.width  = d.size + 'px';
+      b.style.height = d.size + 'px';
+      if (d.size < 95)       b.style.fontSize = '24px';
+      else if (d.size > 140) b.style.fontSize = '24px';
+      b.textContent = d.label;
+      b.addEventListener('mouseenter', () => showInfo(d));
+      b.addEventListener('click',     () => selectBubble(d, b));
+      chart.appendChild(b);
+    });
+
+    function showInfo(d) {
+      if (!info) return;
+      info.classList.remove('empty-state');
+      info.innerHTML = `
+        <div class="label-block">
+          <p class="meta-label">${catName[d.cat]}</p>
+          <p class="meta-index">— ${d.num}</p>
+        </div>
+        <div class="body-block">
+          <p class="info-title">${d.label}</p>
+          <p class="info-desc">${d.desc}</p>
+        </div>
+      `;
+    }
+
+    function selectBubble(d, el) {
+      document.querySelectorAll('.bubble').forEach(b => b.classList.remove('selected'));
+      el.classList.add('selected');
+      showInfo(d);
+    }
+
+    document.querySelectorAll('.tool-tag').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tool-tag').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.bubble').forEach(b => {
+          if (f === 'all' || b.dataset.cat === f) b.classList.remove('dim');
+          else b.classList.add('dim');
+        });
+        document.querySelectorAll('.corner-label').forEach(l => {
+          if (f === 'all' || l.dataset.cat === f) l.classList.remove('hidden');
+          else l.classList.add('hidden');
+        });
+      });
+    });
+  }
+</script>
+
+<script>
+// Pain-flow fill animation
+(function () {
+  const fillRect = document.getElementById('downfill-rect');
+  const painWrap = document.querySelector('.pain-flow-wrap');
+  if (!fillRect || !painWrap) return;
+
+  const MAX_H = 970;
+  const DURATION = 1200;
+  let rafId = null;
+
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  function playFill() {
+    if (rafId) cancelAnimationFrame(rafId);
+    fillRect.setAttribute('height', '0');
+    const start = performance.now();
+    function step(now) {
+      const t = Math.min((now - start) / DURATION, 1);
+      fillRect.setAttribute('height', String(easeInOut(t) * MAX_H));
+      if (t < 1) rafId = requestAnimationFrame(step);
+      else rafId = null;
+    }
+    rafId = requestAnimationFrame(step);
+  }
+
+  const flowObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        playFill();
+        flowObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  flowObs.observe(painWrap);
+  painWrap.addEventListener('mouseenter', playFill);
+})();
+</script>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+<script>
+  // pain-flow SVG 座標 + 物件除錯小工具
+  // 點擊 SVG 上的任何位置，會顯示：
+  //   - 滑鼠落在哪個 SVG 子元素上 (tag / class / 文字)
+  //   - 該位置的 SVG 內部座標 (viewBox 座標系)
+  (function () {
+    const svgMap = document.querySelector('#pain-flow');
+    if (!svgMap) {
+      console.warn('找不到 #pain-flow SVG');
+      return;
+    }
+
+    svgMap.addEventListener('click', (e) => {
+      // 將螢幕座標換算成 viewBox 內部座標
+      const pt = svgMap.createSVGPoint();
+      pt.x = e.clientX;
+      pt.y = e.clientY;
+      const cursorPt = pt.matrixTransform(svgMap.getScreenCTM().inverse());
+      const x = Math.round(cursorPt.x);
+      const y = Math.round(cursorPt.y);
+
+      // 抓被點到的子元素資訊
+      const t = e.target;
+      const tag = t.tagName;
+      const cls = t.getAttribute('class') || '';
+      const txt = (t.textContent || '').trim();
+
+      // 組合人類可讀的物件描述
+      let label = '<' + tag + '>';
+      if (cls)  label += ' class="' + cls + '"';
+      if (txt && tag.toLowerCase() === 'text') {
+        label += ' 文字="' + txt + '"';
+      }
+      if (tag.toLowerCase() === 'svg') {
+        label = 'SVG 背景 (沒有命中具體元素)';
+      }
+
+      // 同時印到 console 與彈窗
+      console.log('[pain-flow] click', { x, y, tag, class: cls, text: txt, target: t });
+      alert(
+        '📍 點擊位置\n' +
+        '物件: ' + label + '\n' +
+        'X = ' + x + '\n' +
+        'Y = ' + y
+      );
+    });
+
+    console.log('[pain-flow] 座標除錯已啟用 (點擊 SVG 觀察)');
+  })();
+</script>
+
+</body>
+</html>

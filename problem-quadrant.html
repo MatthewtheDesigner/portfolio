@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VOGA — CROSS-SECTION ANALYSIS</title>
+<style>
+  :root {
+    --bg:          #F0EFED;
+    --black:       #1a1a1a;
+    --grey:        #999999;
+    --light-grey:  #c8c8c8;
+    --border:      #d0cfc9;
+    --heading:     56px;
+    --body:        24px;
+    --small:       18px;
+    --margin:      50px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: hidden; }
+  body {
+    width: 100%;
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'SourceHanSerif', 'Noto Serif TC', 'Songti TC', serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px var(--margin);
+    background: rgba(240,239,237,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
+  .nav-name {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.10em;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: var(--small);
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* ---------- LAYOUT ---------- */
+  main {
+    padding: 50px var(--margin);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-index {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 0.20em;
+    color: var(--light-grey);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .project-section-label {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: var(--small);
+    letter-spacing: 0.20em;
+    color: var(--light-grey);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  h1.section-heading {
+    font-size: var(--heading);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+  .project-section-body {
+    font-size: var(--body);
+    color: var(--grey);
+    line-height: 1.9;
+    max-width: 760px;
+    margin-bottom: 64px;
+  }
+
+  /* ---------- FILTERS ---------- */
+  .tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  .tool-tag {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: var(--small);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: transparent;
+    border: 1px solid var(--black);
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .tool-tag:hover { background: var(--black); color: var(--bg); }
+  .tool-tag.active { background: var(--black); color: var(--bg); }
+
+  /* ---------- CROSS-SECTION DIAGRAM ---------- */
+  .cross-wrap {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    aspect-ratio: 1 / 1.1;
+    position: relative;
+    border-top: 1px solid var(--black);
+  }
+  .axis-h, .axis-v {
+    position: absolute;
+    background: var(--black);
+  }
+  .axis-h { left: 0; right: 0; top: 50%; height: 1px; }
+  .axis-v { top: 6%; bottom: 6%; left: 0%; width: 1px; }
+  .grey-line {
+  position: absolute;
+  background: var(--border);   /* hairline grey #d0cfc9 */
+}
+.grey-line.thicker { background: var(--light-grey); }  /* slightly darker grey */
+
+  .corner-label {
+    position: absolute;
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--grey);
+    pointer-events: none;
+    z-index: 4;
+  }
+  .corner-cn {
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--black);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+    display: block;
+  }
+  .corner-tl { top: 50px; left: 150px; }
+  .corner-bl { bottom: 25%; left: 280px; }
+  .corner-tr { top: 50px; right: 27%; }
+  .corner-br { bottom: 5%; right: 25%; text-align: right; }
+  .corner-label.hidden { display: none; }
+
+
+  /* bubbles — stroke only, no fill */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--light-grey);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.2,.8,.2,1);
+    color: var(--black);
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-size: 13px;
+    line-height: 1.45;
+    padding: 10px;
+    user-select: none;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  .bubble:hover {
+    border: 1.5px solid var(--black);
+    color: var(--black);
+    z-index: 20;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
+  .bubble.selected {
+    background: var(--black);
+    color: var(--bg);
+    border: 1px solid var(--black);
+    z-index: 25;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+  .bubble.dim {
+    border-color: var(--border);
+    color: var(--light-grey);
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  /* filled accent bubbles — no stroke, #009966 @ 35%, gaussian blur 12px */
+  .bubble.filled {
+    border: none;
+    background: transparent;
+    color: var(--black);
+    isolation: isolate;
+    overflow: visible;
+  }
+  .bubble.filled::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0, 153, 102, 0.35);
+    filter: blur(12px);
+    z-index: -1;
+  }
+  .bubble.filled:hover {
+    border: none;
+    background: transparent;
+  }
+  .bubble.filled:hover::before {
+    background: rgba(0, 153, 102, 0.55);
+  }
+  .bubble.filled.selected {
+    border: none;
+    background: transparent;
+    color: var(--bg);
+  }
+  .bubble.filled.selected::before {
+    background: rgba(0, 153, 102, 0.85);
+  }
+  .bubble.filled.dim {
+    background: transparent;
+    color: var(--light-grey);
+  }
+  .bubble.filled.dim::before {
+    background: rgba(0, 153, 102, 0.15);
+  }
+
+  /* filled accent bubbles — no stroke, #357c8c @ 35%, gaussian blur 12px */
+  .bubble.filled-teal {
+    border: none;
+    background: transparent;
+    color: var(--black);
+    isolation: isolate;
+    overflow: visible;
+  }
+  .bubble.filled-teal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(53, 124, 140, 0.35);
+    filter: blur(12px);
+    z-index: -1;
+  }
+  .bubble.filled-teal:hover {
+    border: none;
+    background: transparent;
+  }
+  .bubble.filled-teal:hover::before {
+    background: rgba(53, 124, 140, 0.55);
+  }
+  .bubble.filled-teal.selected {
+    border: none;
+    background: transparent;
+    color: var(--bg);
+  }
+  .bubble.filled-teal.selected::before {
+    background: rgba(53, 124, 140, 0.85);
+  }
+  .bubble.filled-teal.dim {
+    background: transparent;
+    color: var(--light-grey);
+  }
+  .bubble.filled-teal.dim::before {
+    background: rgba(53, 124, 140, 0.15);
+  }
+
+  /* filled accent bubbles — no stroke, #00cccc @ 35%, gaussian blur 12px */
+  .bubble.filled-cyan {
+    border: none;
+    background: transparent;
+    color: var(--black);
+    isolation: isolate;
+    overflow: visible;
+  }
+  .bubble.filled-cyan::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0, 204, 204, 0.35);
+    filter: blur(12px);
+    z-index: -1;
+  }
+  .bubble.filled-cyan:hover {
+    border: none;
+    background: transparent;
+  }
+  .bubble.filled-cyan:hover::before {
+    background: rgba(0, 204, 204, 0.55);
+  }
+  .bubble.filled-cyan.selected {
+    border: none;
+    background: transparent;
+    color: var(--bg);
+  }
+  .bubble.filled-cyan.selected::before {
+    background: rgba(0, 204, 204, 0.85);
+  }
+  .bubble.filled-cyan.dim {
+    background: transparent;
+    color: var(--light-grey);
+  }
+  .bubble.filled-cyan.dim::before {
+    background: rgba(0, 204, 204, 0.15);
+  }
+
+  /* filled accent bubbles — no stroke, #ff3300 @ 35%, gaussian blur 12px */
+  .bubble.filled-red {
+    border: none;
+    background: transparent;
+    color: var(--black);
+    isolation: isolate;
+    overflow: visible;
+  }
+  .bubble.filled-red::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 51, 0, 0.35);
+    filter: blur(12px);
+    z-index: -1;
+  }
+  .bubble.filled-red:hover {
+    border: none;
+    background: transparent;
+  }
+  .bubble.filled-red:hover::before {
+    background: rgba(255, 51, 0, 0.55);
+  }
+  .bubble.filled-red.selected {
+    border: none;
+    background: transparent;
+    color: var(--bg);
+  }
+  .bubble.filled-red.selected::before {
+    background: rgba(255, 51, 0, 0.85);
+  }
+  .bubble.filled-red.dim {
+    background: transparent;
+    color: var(--light-grey);
+  }
+  .bubble.filled-red.dim::before {
+    background: rgba(255, 51, 0, 0.15);
+  }
+
+  /* ---------- INFO PANEL ---------- */
+  .info-panel {
+    margin-top: 64px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 80px;
+  }
+  .info-panel .label-block .meta-label {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: var(--small);
+    letter-spacing: 0.18em;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .info-panel .label-block .meta-index {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.20em;
+    color: var(--light-grey);
+  }
+  .info-panel .body-block .info-title {
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: var(--body);
+    color: var(--black);
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .info-panel .body-block .info-desc {
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-size: 20px;
+    color: var(--grey);
+    line-height: 1.8;
+  }
+  .info-panel.empty-state .body-block { color: var(--light-grey); font-size: var(--small); padding-top: 4px; }
+
+  /* ---------- AXIS TITLES ---------- */
+  .chart-frame {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: 1fr 60px;
+    column-gap: 16px;
+    row-gap: 16px;
+    max-width: 1060px;
+    margin: 0 auto;
+  }
+  .y-axis-title {
+    grid-column: 1; grid-row: 1;
+    position: relative;
+    padding-right: 50%;
+  }
+  .y-axis-rotated {
+    position: absolute;
+    top: 50%; left: 90%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    white-space: nowrap;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .y-axis-arrow-top {
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+  }
+  .y-axis-arrow-bottom {
+    position: absolute;
+    bottom: 12px; left: 50%;
+    transform: translateX(-50%);
+  }
+  .x-axis-title {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    padding-left: 16px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    white-space: nowrap;
+    z-index: 5;
+    background: var(--bg);
+  }
+  .axis-eng {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+  .axis-cn {
+    font-family: 'SourceHanSerif', 'Noto Serif TC', serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.15em;
+    color: var(--black);
+  }
+  .axis-arrow {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-size: 14px;
+    color: var(--light-grey);
+    letter-spacing: 0.10em;
+  }
+  .chart-cell { grid-column: 2; grid-row: 1; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--border);
+    margin-top: 120px;
+    padding: 80px var(--margin);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .footer-name {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-weight: 900;
+    font-size: 60px;
+    letter-spacing: 0.06em;
+    color: var(--black);
+    line-height: 1.0;
+  }
+  .footer-sub {
+    font-size: var(--small);
+    color: var(--grey);
+    margin-top: 8px;
+  }
+  .footer-copy {
+    font-family: 'RobotoCondensed', 'Arial Narrow', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    color: var(--light-grey);
+    text-transform: uppercase;
+    margin-top: 24px;
+  }
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    font-size: var(--small);
+    color: var(--grey);
+  }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 800px) {
+    .info-panel { grid-template-columns: 1fr; gap: 24px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 40px; }
+    .footer-contact { align-items: flex-start; }
+    .bubble { font-size: 11px; padding: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+
+  <div class="tools-grid reveal">
+    <button class="tool-tag active" data-filter="all">ALL</button>
+    <button class="tool-tag" data-filter="psych">PSYCHOLOGICAL</button>
+    <button class="tool-tag" data-filter="physical">PHYSICAL</button>
+    <button class="tool-tag" data-filter="course">COURSE</button>
+    <button class="tool-tag" data-filter="equip">EQUIPMENT</button>
+  </div>
+
+  <div class="chart-frame reveal">
+    <div class="y-axis-title">
+      <span class="y-axis-rotated">
+        <span class="axis-cn">難度</span>
+        <span class="axis-eng">DIFFICULTY</span>
+      </span>
+    </div>
+
+    <div class="chart-cell">
+      <div class="cross-wrap" id="chart">
+        <div class="axis-h"></div>
+        <div class="axis-v"></div>
+
+        <div class="grey-line" style="left: 0; right: 0; top: 8%; height: 1px;"></div>
+        <div class="grey-line" style="left: 0; right: 62%; top: 75%; height: 1px;"></div>
+        <div class="grey-line" style="top: 6%; bottom: 6%; left: 8%; width: 1px;"></div>
+        <div class="grey-line" style="top: 6%; bottom: 6%; left: 38%; width: 1px;"></div>
+
+        <div class="corner-label corner-tl" data-cat="psych">
+          <span class="corner-cn">心理問題</span>
+        </div>
+        <div class="corner-label corner-tr" data-cat="course">
+          <span class="corner-cn">課程問題</span>
+        </div>
+        <div class="corner-label corner-bl" data-cat="physical">
+          <span class="corner-cn">身體問題</span>
+        </div>
+        <div class="corner-label corner-br" data-cat="equip">
+          <span class="corner-cn">器材問題</span>
+        </div>
+
+        <div class="x-axis-title">
+          <span class="axis-cn">影響力</span>
+          <span class="axis-eng">IMPACT</span>
+        </div>
+
+        <!-- bubbles populated by JS -->
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // Position data — coords are % of container, sizes in px
+  // Layout mirrors the original cross-section image
+  const items = [
+    // ---- Top-Left : 心理問題 ----
+    { id:'p1',  cat:'psych',  num:'01.01', label:'焦慮感',                            desc:'使用者在練習過程中持續感到焦慮不安，影響呼吸與專注。',                              x:24,  y:13, size:92 },
+    { id:'p2',  cat:'psych',  num:'01.02', label:'孤獨感',                            desc:'在課堂中感到自己與其他學員之間存在難以跨越的距離。',                              x:14,  y:25, size:88 },
+    { id:'p3',  cat:'psych',  num:'01.03', label:'覺得自己是負擔',                     desc:'擔心需要他人額外協助而拖累課程節奏，產生愧疚感。',                                x:21,  y:38, size:108 },
+    { id:'p4',  cat:'psych',  num:'01.04', label:'自我懷疑',                          desc:'無法即時確認動作正確性，導致對自身能力的懷疑。',                                  x:32,  y:45, size:86 },
+
+    // ---- Top-Right : 課程問題 ----
+    { id:'c1',  cat:'course', num:'02.01', label:'聽覺指令為線性的，而動作要求為同時性的', desc:'口語只能依序傳達，但體位法常需多個身體部位同時調整，造成認知瓶頸。',            x:58,  y:23, size:170 },
+    { id:'c2',  cat:'course', num:'02.02', label:'缺乏視覺經驗參照',                   desc:'無法透過觀看他人示範動作建立內部模板。',                                          x:80,  y:11, size:108 },
+    { id:'c3',  cat:'psych',  num:'01.11', label:'不知道自己對不對',                   desc:'缺乏即時回饋管道確認動作的角度、軸線與重心。',                                    x:86,  y:23, size:104 },
+    { id:'c4',  cat:'course', num:'02.04', label:'抽象詞彙與視覺隱喻的隔閡',            desc:'老師以「像一棵樹」「打開胸口」等視覺性比喻描述動作，難以轉譯為身體經驗。',         x:80,  y:38, size:124 },
+
+    // ---- Middle band (心理 cont.) ----
+    { id:'p5',  cat:'physical', num:'04.01', label:'需要一次同時處理大量指令',            desc:'聽覺輸入為線性，而動作執行需多部位同步，認知負荷極高。',                          x:14,  y:55, size:128 },
+    { id:'p6',  cat:'physical', num:'04.02', label:'找不到身體方位',                     desc:'失去空間參照後，難以判斷四肢相對於身體中軸的位置。',                              x:32,  y:60, size:100 },
+
+    // ---- Bottom-Left : 心理 cont. ----
+    { id:'p7',  cat:'physical', num:'04.03', label:'空間感迷失',                         desc:'對所處場域大小、形狀、邊界缺乏掌握。',                                            x:22,  y:69, size:100 },
+    { id:'p8',  cat:'psych',  num:'01.08', label:'恐懼感',                             desc:'對未知環境與潛在碰撞的長期警覺，難以放鬆身體。',                                  x:13,  y:83, size:84 },
+    { id:'p9',  cat:'psych',  num:'01.09', label:'不安感',                             desc:'即使在熟悉空間中，仍存在持續的不確定感。',                                        x:30,  y:83, size:84 },
+    { id:'p10', cat:'psych',  num:'01.10', label:'沒有邊界的恐懼',                      desc:'缺乏明確物理邊界，使移動範圍與安全區域模糊不清。',                                x:21,  y:93, size:108 },
+
+    // ---- Bottom-Right : 器材問題 ----
+    { id:'e1',  cat:'equip',  num:'03.01', label:'需要明確物理邊界來建立安全範圍',       desc:'可觸知的墊面邊界能定義「安全活動區」，降低焦慮。',                                x:82,  y:64, size:138 },
+    { id:'e2',  cat:'equip',  num:'03.02', label:'聲音回饋不足',                        desc:'現有器材缺乏即時的聲響或語音引導，難以即時校正。',                                x:60,  y:72, size:96 },
+    { id:'e3',  cat:'equip',  num:'03.03', label:'找不到墊子',                          desc:'進場、移動後常找不回自己的瑜珈墊位置。',                                          x:78,  y:78, size:90 },
+    { id:'e4',  cat:'equip',  num:'03.04', label:'缺乏「觸覺回饋」的瑜珈墊',             desc:'平面化的墊面無法提供位置、方向與動作的觸覺線索。',                                x:60,  y:90, size:124 },
+    { id:'e5',  cat:'equip',  num:'03.05', label:'抓地力不足的輔具',                    desc:'輔具防滑性能不佳，影響姿勢穩定與安全。',                                          x:82,  y:88, size:114 },
+  ];
+
+  const catName = { psych: 'PSYCHOLOGICAL', physical: 'PHYSICAL', course: 'COURSE', equip: 'EQUIPMENT' };
+  const chart = document.getElementById('chart');
+  const info  = document.getElementById('info');
+
+  // bubbles to render with the green filled style (#009966 @ 35%)
+  const FILLED_IDS = new Set(['p1','p2','p3','p4','p8','p9','p10','c3']);
+  // bubbles to render with the teal filled style (#357c8c @ 35%)
+  const FILLED_TEAL_IDS = new Set(['p5','p6','p7']);
+  // bubbles to render with the cyan filled style (#00cccc @ 35%)
+  const FILLED_CYAN_IDS = new Set(['c1','c2','c4']);
+  // bubbles to render with the red filled style (#ff3300 @ 35%)
+  const FILLED_RED_IDS = new Set(['e1','e2','e3','e4','e5']);
+
+  items.forEach(d => {
+    const b = document.createElement('div');
+    let extra = '';
+    if (FILLED_IDS.has(d.id))           extra = ' filled';
+    else if (FILLED_TEAL_IDS.has(d.id)) extra = ' filled-teal';
+    else if (FILLED_CYAN_IDS.has(d.id)) extra = ' filled-cyan';
+    else if (FILLED_RED_IDS.has(d.id))  extra = ' filled-red';
+    b.className = 'bubble' + extra;
+    b.dataset.id = d.id;
+    b.dataset.cat = d.cat;
+    b.style.left   = d.x + '%';
+    b.style.top    = d.y + '%';
+    b.style.width  = d.size + 'px';
+    b.style.height = d.size + 'px';
+    if (d.size < 95)       b.style.fontSize = '11px';
+    else if (d.size > 140) b.style.fontSize = '14px';
+    b.textContent = d.label;
+    b.addEventListener('mouseenter', () => showInfo(d));
+    b.addEventListener('click',     () => selectBubble(d, b));
+    chart.appendChild(b);
+  });
+
+  function showInfo(d) {
+    if (!info) return;
+    info.classList.remove('empty-state');
+    info.innerHTML = `
+      <div class="label-block">
+        <p class="meta-label">${catName[d.cat]}</p>
+        <p class="meta-index">— ${d.num}</p>
+      </div>
+      <div class="body-block">
+        <p class="info-title">${d.label}</p>
+        <p class="info-desc">${d.desc}</p>
+      </div>
+    `;
+  }
+
+  function selectBubble(d, el) {
+    document.querySelectorAll('.bubble').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    showInfo(d);
+  }
+
+  document.querySelectorAll('.tool-tag').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tool-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.bubble').forEach(b => {
+        if (f === 'all' || b.dataset.cat === f) b.classList.remove('dim');
+        else b.classList.add('dim');
+      });
+      document.querySelectorAll('.corner-label').forEach(l => {
+        if (f === 'all' || l.dataset.cat === f) l.classList.remove('hidden');
+        else l.classList.add('hidden');
+      });
+    });
+  });
+
+  // reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
