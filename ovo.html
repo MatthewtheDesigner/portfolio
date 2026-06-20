@@ -850,6 +850,38 @@ footer {
   display: block;
   object-fit: cover;
 }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  :root { --margin: 20px; --heading: 32px; --body: 17px; --small: 14px; }
+
+  nav { padding: 18px var(--margin); }
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 14px; }
+
+  .project-hero-overlay { padding: 24px var(--margin); flex-direction: column; align-items: flex-start; gap: 4px; }
+  .project-hero-title { font-size: 52px; }
+  .project-hero-subtitle { font-size: 16px; max-width: 100%; text-align: left; }
+
+  .project-meta { grid-template-columns: 1fr 1fr; padding: 40px var(--margin); }
+  .meta-item { padding: 16px 12px 16px 0; margin-right: 0; border-right: none; border-bottom: 1px solid var(--border); }
+  .meta-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .meta-item:nth-last-child(-n+2) { border-bottom: none; }
+  .meta-value { font-size: 18px; }
+
+  .project-content { padding: 48px var(--margin); }
+  .project-section { margin-bottom: 60px; }
+  .project-section-body { max-width: 100%; }
+
+  .split-layout { grid-template-columns: 1fr; gap: 32px; }
+  .split-layout.reverse { direction: ltr; }
+
+  .assets-side-grid { grid-template-columns: 1fr !important; }
+
+  footer { flex-direction: column; align-items: flex-start; gap: 32px; padding: 48px var(--margin); }
+  .footer-name { font-size: 36px; }
+  .footer-contact { text-align: left; }
+}
 </style>
 </head>
 
@@ -1060,7 +1092,7 @@ footer {
       <div class="img-full" style="margin-top:40px;">
         <img src="ovo.88.png" alt="OVO Render 88">
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;">
+      <div class="assets-side-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;">
         <div>
           <object data="資產 25.svg" type="image/svg+xml" style="width:100%;display:block;pointer-events:none;"></object>
           <p class="project-section-body" style="margin-top:12px;">拔模分析</p>

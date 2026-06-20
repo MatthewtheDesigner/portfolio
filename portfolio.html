@@ -791,6 +791,37 @@ footer {
   @media (max-width: 800px) {
     .bubble { font-size:24px; padding: 6px; }
   }
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  :root { --margin: 20px; --heading: 32px; --body: 17px; --small: 14px; }
+
+  nav { padding: 18px var(--margin); }
+  .nav-links { gap: 20px; }
+  .nav-links a { font-size: 14px; }
+
+  #hero { grid-template-columns: 1fr; }
+  .hero-left { height: 55vw; min-height: 220px; }
+  .hero-right { padding: 40px var(--margin) 48px; justify-content: flex-start; }
+  .hero-name { font-size: 56px; }
+  .hero-name-en { font-size: 32px; margin-bottom: 36px; }
+  .hero-contact { margin-bottom: 32px; }
+  .hero-scroll { display: none; }
+
+  #about { grid-template-columns: 1fr; padding: 60px var(--margin); gap: 48px; }
+
+  #quote { padding: 60px var(--margin); }
+  .quote-fr { font-size: 22px; }
+  .quote-en { font-size: 16px; }
+
+  #works { padding: 60px var(--margin) !important; }
+  .works-layout-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .works-cards-grid { grid-template-columns: 1fr !important; }
+
+  footer { flex-direction: column; align-items: flex-start; gap: 32px; padding: 48px var(--margin); }
+  .footer-name { font-size: 36px; }
+  .footer-contact { text-align: left; }
+}
 </style>
 </head>
 
@@ -883,12 +914,12 @@ footer {
 
 <!-- WORKS -->
 <section id="works" style="border-top:1px solid var(--border);padding:140px var(--margin);">
-  <div style="display:grid;grid-template-columns:340px 1fr;gap:0 80px;align-items:start;">
+  <div class="works-layout-grid" style="display:grid;grid-template-columns:340px 1fr;gap:0 80px;align-items:start;">
     <div>
       <div class="section-index">02 — 作品</div>
       <h2 class="section-heading reveal">設計作品</h2>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+    <div class="works-cards-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
       <div class="reveal" style="display:flex;flex-direction:column;gap:0;">
         <a href="voga.html" style="display:block;text-decoration:none;color:inherit;">
           <div style="overflow:hidden;position:relative;aspect-ratio:4/3;">
