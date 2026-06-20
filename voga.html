@@ -792,11 +792,73 @@ footer {
 /* chart mobile/desktop toggle */
 .chart-mobile-img { display: none; width: 100%; height: auto; }
 
+/* UJM open button — hidden on desktop */
+.ujm-open-btn {
+  display: none;
+  margin-top: 28px;
+  width: 100%;
+  padding: 18px 24px;
+  background: var(--black);
+  color: var(--bg);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* UJM fullscreen modal */
+.ujm-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  flex-direction: column;
+}
+.ujm-modal.open { display: flex; }
+.ujm-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.ujm-modal-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  color: var(--black);
+}
+.ujm-close-btn {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  background: none;
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--black);
+}
+.ujm-modal-body {
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+}
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .chart-mobile-img { display: block; }
   .chart-frame { display: none; }
   .tools-grid { display: none; }
+  .ujm-open-btn { display: block; }
+  .journey-wrap { display: none; }
   :root { --margin: 20px; --heading: 32px; --body: 17px; --small: 14px; }
 
   nav { padding: 18px var(--margin); }
@@ -1070,6 +1132,19 @@ footer {
       <p class="project-section-label">03 — 使用者旅程地圖</p>
       <h3 class="project-section-heading">瑜珈課程中的情緒歷程</h3>
       <p class="project-section-body">透過 User Journey Map 得到使用者最頭痛的點多半在進行主課程的時候，最讓使用者不舒服的地方為找不到方向，沒辦法定位。</p>
+
+      <!-- Mobile UJM button (hidden on desktop) -->
+      <button class="ujm-open-btn" id="ujmOpenBtn" onclick="openUJM()">點此查看 User Journey Map →</button>
+
+      <!-- UJM fullscreen modal -->
+      <div class="ujm-modal" id="ujmModal">
+        <div class="ujm-modal-bar">
+          <span class="ujm-modal-title">使用者旅程地圖</span>
+          <button class="ujm-close-btn" onclick="closeUJM()">✕ 關閉</button>
+        </div>
+        <div class="ujm-modal-body" id="ujmModalBody"></div>
+      </div>
+
       <div class="img-full">
       <style>
         .journey-wrap { overflow-x: auto; margin-top: 20px; position: relative; }
@@ -1548,6 +1623,46 @@ footer {
   flowObs.observe(painWrap);
   painWrap.addEventListener('mouseenter', playFill);
 })();
+</script>
+
+<script>
+// UJM modal
+function openUJM() {
+  var modal = document.getElementById('ujmModal');
+  var body  = document.getElementById('ujmModalBody');
+  var src   = document.getElementById('journeyWrap');
+  if (!body.hasChildNodes() && src) {
+    var clone = src.cloneNode(true);
+    clone.id = 'journeyWrapClone';
+    clone.className = ''; // remove journey-wrap class to avoid display:none from mobile CSS
+    // force all cells visible immediately (skip animation)
+    clone.style.cssText = 'display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;min-width:0;';
+    clone.querySelectorAll('.stage-cell, .data-cell').forEach(function(el) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.animation = 'none';
+    });
+    // force table to be wide enough to scroll properly
+    var tbl = clone.querySelector('table');
+    if (tbl) {
+      tbl.style.width = '960px';
+      tbl.style.minWidth = '960px';
+      tbl.style.tableLayout = 'fixed';
+    }
+    // hint label
+    var hint = document.createElement('p');
+    hint.textContent = '← 左右滑動 →';
+    hint.style.cssText = 'font-family:Roboto Condensed,sans-serif;font-size:12px;letter-spacing:0.15em;color:#c8c8c8;text-align:center;padding:8px 0 4px;';
+    body.appendChild(hint);
+    body.appendChild(clone);
+  }
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeUJM() {
+  document.getElementById('ujmModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
 </script>
 
 <script>
