@@ -789,8 +789,14 @@ footer {
     .bubble { font-size:24px; padding: 6px; }
   }
 
+/* chart mobile/desktop toggle */
+.chart-mobile-img { display: none; width: 100%; height: auto; }
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
+  .chart-mobile-img { display: block; }
+  .chart-frame { display: none; }
+  .tools-grid { display: none; }
   :root { --margin: 20px; --heading: 32px; --body: 17px; --small: 14px; }
 
   nav { padding: 18px var(--margin); }
@@ -1019,6 +1025,7 @@ footer {
         <button class="tool-tag" data-filter="equip">EQUIPMENT</button>
       </div>
 
+      <img src="bubble-chart-static.png" class="chart-mobile-img" alt="問題象限圖">
       <div class="chart-frame reveal">
         <div class="y-axis-title">
           <span class="y-axis-rotated">
