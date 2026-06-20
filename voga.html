@@ -1646,18 +1646,16 @@ function openUJM() {
     // fix table width for horizontal scroll
     var tbl = clone.querySelector('table');
     if (tbl) { tbl.style.width = '960px'; tbl.style.minWidth = '960px'; }
+    // force all cells visible immediately (no animation)
+    clone.querySelectorAll('.stage-cell, .data-cell').forEach(function(el) {
+      el.style.opacity = '1';
+      el.style.animation = 'none';
+      el.style.transform = 'none';
+    });
     body.appendChild(clone);
   }
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
-
-  // trigger reveal animation on the cloned wrap
-  var cloneEl = document.getElementById('journeyWrapClone');
-  if (cloneEl) {
-    cloneEl.classList.remove('animate');
-    void cloneEl.offsetWidth; // reflow
-    cloneEl.classList.add('animate');
-  }
 }
 function closeUJM() {
   document.getElementById('ujmModal').classList.remove('open');
