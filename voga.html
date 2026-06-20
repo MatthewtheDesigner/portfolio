@@ -1651,6 +1651,8 @@ function openUJM() {
       el.style.opacity = '1';
       el.style.animation = 'none';
       el.style.transform = 'none';
+      el.style.wordBreak = 'break-all';
+      el.style.overflowWrap = 'break-word';
     });
     body.appendChild(clone);
   }
