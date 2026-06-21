@@ -405,7 +405,15 @@ footer {
       <p class="project-section-body">
         我們著重在兩個問題面向:一是候車時候的溫度難以忍受，二是資訊分散難以閱讀。
       </p>
-    </div>
+      <!-- Temperature Anomaly Chart -->
+      <div class="temp-chart-wrap" style="margin-top:56px;">
+        <div style="font-family:'Roboto Condensed',sans-serif;font-size:13px;letter-spacing:0.06em;color:var(--grey);line-height:2;margin-bottom:10px;">
+          0.15 &#176;C /10yr &nbsp;( 1898 &#8211; 2024 )<br>
+          0.32 &#176;C /10yr &nbsp;( 1995 &#8211; 2024 )
+        </div>
+        <canvas id="tempChart" style="width:100%;display:block;"></canvas>
+        <p class="img-caption" style="margin-top:12px;">日本年均氣溫偏差 1880&#8211;2024（相對於 1991&#8211;2020 年平均值）</p>
+      </div>    </div>
 
     <div class="project-section reveal">
       <p class="project-section-label">02 — 設計過程</p>
@@ -451,5 +459,153 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
+
+<script>
+(function () {
+  var raw = [
+    [1880,-0.22],[1881,-0.11],[1882,-0.27],[1883,-0.16],[1884,-0.34],
+    [1885,-0.31],[1886,-0.25],[1887,-0.19],[1888,-0.30],[1889,-0.17],
+    [1890,-0.36],[1891,-0.22],[1892,-0.28],[1893,-0.26],[1894,-0.19],
+    [1895,-0.23],[1896,-0.11],[1897,-0.18],[1898,-0.27],[1899,-0.17],
+    [1900,-0.08],[1901,-0.15],[1902,-0.28],[1903,-0.37],[1904,-0.47],
+    [1905,-0.25],[1906,-0.22],[1907,-0.39],[1908,-0.42],[1909,-0.35],
+    [1910,-0.41],[1911,-0.44],[1912,-0.53],[1913,-0.55],[1914,-0.47],
+    [1915,-0.36],[1916,-0.78],[1917,-1.30],[1918,-0.61],[1919,-0.44],
+    [1920,-0.27],[1921,-0.19],[1922,-0.28],[1923,-0.26],[1924,-0.27],
+    [1925,-0.22],[1926,-0.11],[1927,-0.18],[1928,-0.29],[1929,-0.36],
+    [1930,-0.09],[1931,-0.08],[1932,-0.11],[1933,-0.27],[1934,-0.13],
+    [1935,-0.19],[1936,-0.14],[1937,0.02],[1938,0.07],[1939,-0.02],
+    [1940,0.09],[1941,0.20],[1942,-0.07],[1943,0.09],[1944,0.22],
+    [1945,-0.01],[1946,-0.01],[1947,-0.03],[1948,0.05],[1949,0.06],
+    [1950,-0.16],[1951,0.01],[1952,0.02],[1953,0.08],[1954,-0.13],
+    [1955,-0.14],[1956,-0.15],[1957,0.05],[1958,0.06],[1959,0.03],
+    [1960,-0.03],[1961,0.05],[1962,0.03],[1963,0.05],[1964,-0.21],
+    [1965,-0.11],[1966,-0.06],[1967,-0.02],[1968,-0.07],[1969,0.08],
+    [1970,0.03],[1971,-0.08],[1972,0.01],[1973,0.16],[1974,-0.07],
+    [1975,-0.01],[1976,-0.10],[1977,0.18],[1978,0.07],[1979,0.16],
+    [1980,0.26],[1981,0.32],[1982,0.14],[1983,0.31],[1984,0.16],
+    [1985,0.12],[1986,0.18],[1987,0.33],[1988,0.40],[1989,0.33],
+    [1990,0.44],[1991,0.41],[1992,0.23],[1993,0.24],[1994,0.31],
+    [1995,0.45],[1996,0.35],[1997,0.46],[1998,0.63],[1999,0.41],
+    [2000,0.42],[2001,0.54],[2002,0.63],[2003,0.62],[2004,0.54],
+    [2005,0.68],[2006,0.61],[2007,0.66],[2008,0.54],[2009,0.64],
+    [2010,0.72],[2011,0.61],[2012,0.65],[2013,0.68],[2014,0.75],
+    [2015,0.90],[2016,1.01],[2017,0.92],[2018,0.83],[2019,0.98],
+    [2020,1.60],[2021,0.84],[2022,0.89],[2023,1.17],[2024,1.65]
+  ];
+  function movingAvg(data, w) {
+    return data.map(function(d, i) {
+      var half = Math.floor(w / 2);
+      var s = Math.max(0, i - half), e = Math.min(data.length - 1, i + half);
+      var vals = data.slice(s, e + 1).map(function(x) { return x[1]; });
+      return [d[0], vals.reduce(function(a, b) { return a + b; }, 0) / vals.length];
+    });
+  }
+  var smoothed = movingAvg(raw, 10);
+  var canvas = document.getElementById('tempChart');
+  var DPR = window.devicePixelRatio || 1;
+  var lastP = 0;
+  var PAD = { top: 32, right: 68, bottom: 40, left: 46 };
+  var MIN_Y = 1880, MAX_Y = 2024, MIN_V = -2.0, MAX_V = 2.0;
+
+  function resize() {
+    var w = canvas.parentElement.offsetWidth;
+    var h = Math.round(w * 0.30);
+    canvas.width = w * DPR; canvas.height = h * DPR;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+  }
+  function xP(year) {
+    var W = canvas.width / DPR;
+    return PAD.left + (year - MIN_Y) / (MAX_Y - MIN_Y) * (W - PAD.left - PAD.right);
+  }
+  function yP(val) {
+    var H = canvas.height / DPR;
+    return PAD.top + (MAX_V - val) / (MAX_V - MIN_V) * (H - PAD.top - PAD.bottom);
+  }
+  function draw(p) {
+    lastP = p;
+    var ctx = canvas.getContext('2d');
+    var W = canvas.width / DPR, H = canvas.height / DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var barW = Math.max(1.5, (W - PAD.left - PAD.right) / (MAX_Y - MIN_Y + 1) - 0.8);
+    var y0 = yP(0);
+    var fs = Math.max(9, Math.round(11 * W / 800));
+    // Grid
+    ctx.strokeStyle = '#E0DFDB'; ctx.lineWidth = 0.5;
+    [-2,-1.5,-1,-0.5,0.5,1,1.5,2].forEach(function(v) {
+      ctx.beginPath(); ctx.moveTo(PAD.left, yP(v)); ctx.lineTo(W - PAD.right, yP(v)); ctx.stroke();
+    });
+    // Y labels
+    ctx.fillStyle = '#aaaaaa';
+    ctx.font = fs + 'px "Roboto Condensed",sans-serif';
+    ctx.textAlign = 'right';
+    [-2,-1.5,-1,-0.5,0,0.5,1,1.5,2].forEach(function(v) {
+      ctx.fillText((v > 0 ? '+' : '') + v.toFixed(1), PAD.left - 6, yP(v) + 4);
+    });
+    // X labels
+    ctx.textAlign = 'center';
+    [1880,1890,1900,1910,1920,1930,1940,1950,1960,1970,1980,1990,2000,2010,2020].forEach(function(y) {
+      ctx.fillText(y, xP(y), H - PAD.bottom + 16);
+    });
+    // Zero line
+    ctx.strokeStyle = '#bbbbbb'; ctx.lineWidth = 0.8;
+    ctx.beginPath(); ctx.moveTo(PAD.left, y0); ctx.lineTo(W - PAD.right, y0); ctx.stroke();
+    // Bars
+    var bp = Math.min(1, p / 0.72);
+    raw.forEach(function(d) {
+      var val = d[1] * bp;
+      var x = xP(d[0]);
+      var yTop = yP(Math.max(0, val)), yBot = yP(Math.min(0, val));
+      ctx.fillStyle = d[1] >= 0 ? '#CC4422' : '#5588CC';
+      ctx.fillRect(x - barW / 2, yTop, barW, Math.max(0.5, yBot - yTop));
+    });
+    // Smoothed line
+    if (p > 0.58) {
+      var lp = Math.min(1, (p - 0.58) / 0.38);
+      var n = Math.floor(smoothed.length * lp);
+      ctx.strokeStyle = '#1a1a1a';
+      ctx.lineWidth = Math.max(1.2, 1.8 * W / 800);
+      ctx.lineJoin = 'round'; ctx.beginPath();
+      for (var i = 0; i < n; i++) {
+        var x2 = xP(smoothed[i][0]), y2 = yP(smoothed[i][1]);
+        i === 0 ? ctx.moveTo(x2, y2) : ctx.lineTo(x2, y2);
+      }
+      ctx.stroke();
+    }
+    // Annotations
+    if (p > 0.88) {
+      var alpha = Math.min(1, (p - 0.88) / 0.12);
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#1a1a1a';
+      ctx.font = 'bold ' + fs + 'px "Roboto Condensed",sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('1917', xP(1917), yP(-1.30) - 14);
+      ctx.fillText('( -1.30 )', xP(1917), yP(-1.30) - 3);
+      ctx.textAlign = 'right';
+      ctx.fillText('2020  ( 1.6 )', xP(2020) - 4, yP(1.60) + 24);
+      ctx.textAlign = 'left';
+      ctx.fillText('2024  ( 1.65 )', xP(2024) + 4, yP(1.65) - 4);
+      ctx.globalAlpha = 1;
+    }
+  }
+  var started = false, startTs = null;
+  function ease(t) { return 1 - Math.pow(1 - t, 2.8); }
+  function animate(ts) {
+    if (!startTs) startTs = ts;
+    var t = Math.min((ts - startTs) / 2200, 1);
+    draw(ease(t));
+    if (t < 1) requestAnimationFrame(animate);
+  }
+  resize(); draw(0);
+  window.addEventListener('resize', function() { resize(); draw(lastP); });
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !started) { started = true; requestAnimationFrame(animate); }
+    });
+  }, { threshold: 0.2 });
+  obs.observe(canvas);
+})();
+</script>
 </body>
 </html>
