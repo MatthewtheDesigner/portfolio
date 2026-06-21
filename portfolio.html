@@ -182,7 +182,7 @@ nav {
   padding: 140px var(--margin);
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 0 80px;
+  gap: 48px 80px;
   border-top: 1px solid var(--border);
 }
 
@@ -194,6 +194,7 @@ nav {
   text-transform: uppercase;
   color: var(--light-grey);
   padding-top: 8px;
+  grid-column: 1 / -1;
 }
 
 .section-heading {
@@ -860,8 +861,8 @@ footer {
 
 <!-- ABOUT -->
 <section id="about">
+  <div class="section-index">01 — 關於</div>
   <div>
-    <div class="section-index">01 — 關於</div>
     <h2 class="section-heading reveal">學歷</h2>
     <div class="about-block">
       <div class="about-entry reveal">
