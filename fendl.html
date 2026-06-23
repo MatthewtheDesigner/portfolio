@@ -649,10 +649,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     setT(t2,a2*(1-m2),lerp(ox[1],0,m2),lerp(oy[1],0,m2));
     var a3=easeOut(phase(p,0.44,0.54)),m3=easeOut(phase(p,0.62,0.74));
     setT(t3,a3*(1-m3),lerp(ox[2],0,m3),lerp(oy[2],0,m3));
-    var af=easeOut(phase(p,0.68,0.80)),mf=easeOut(phase(p,0.90,1.0));
-    tf.style.opacity=af*(1-mf);
+    // FENDL + 資產2 appear together p=0.75-0.90
+    var af=easeOut(phase(p,0.75,0.90));
+    tf.style.opacity=af;
     tf.style.transform='translate(-50%,-50%)';
-    bg.style.opacity=easeOut(phase(p,0.88,1.0))*0.65;
+    bg.style.opacity=af;
   }
   (function tick(){update();requestAnimationFrame(tick);})();
 })();
