@@ -393,7 +393,7 @@ footer {
   </div>
 
   <!-- Section 01: Scroll trigger -->
-  <div id="sec01-trigger" style="height:500vh;"></div>
+  <div id="sec01-trigger" style="height:600vh;"></div>
 
   <!-- Section 01: Fixed overlay -->
   <div id="s01-overlay" style="position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:99;display:none;align-items:center;justify-content:center;overflow:hidden;">
@@ -415,7 +415,7 @@ footer {
 
   <div class="project-content">
 
-    <div class="project-section reveal">
+    <div class="project-section" id="sec-02" style="opacity:0;transform:translateY(60px);">
       <p class="project-section-label">02 — 設計過程</p>
       <h3 class="project-section-heading">研究與發展</h3>
       <p class="project-section-body">
@@ -636,14 +636,23 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     el.style.opacity=opacity;
     el.style.transform='translate(calc(-50% + '+vx+'vw),calc(-50% + '+vy+'vh))';
   }
+  var sec02=document.getElementById('sec-02');
   function update(){
     var rect=trigger.getBoundingClientRect();
     var scrolled=-rect.top;
     var total=trigger.offsetHeight-window.innerHeight;
-    var inRange=scrolled>=-50&&scrolled<trigger.offsetHeight;
-    overlay.style.display=inRange?'flex':'none';
-    if(!inRange)return;
-    var p=clamp(scrolled/total,0,1);
+    var animTotal=total-window.innerHeight;
+    var inAnim=scrolled>=-50&&scrolled<trigger.offsetHeight;
+    overlay.style.display=inAnim?'flex':'none';
+    if(!inAnim)return;
+    // overlay fade-out and sec02 slide-in over last 100vh
+    var transP=clamp((scrolled-animTotal)/window.innerHeight,0,1);
+    overlay.style.opacity=1-easeOut(transP);
+    if(sec02){
+      sec02.style.opacity=easeOut(transP);
+      sec02.style.transform='translateY('+lerp(60,0,easeOut(transP))+'px)';
+    }
+    var p=clamp(scrolled/animTotal,0,1);
     var m1=easeOut(phase(p,0.14,0.26));
     var t1px=lerp(100,0,m1);
     t1.style.opacity=1-m1;
