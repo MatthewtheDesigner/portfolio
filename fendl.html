@@ -638,19 +638,23 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     var scrolled=-rect.top;
     var total=wrapper.offsetHeight-window.innerHeight;
     var p=clamp(scrolled/total,0,1);
-    var m1=easeOut(phase(p,0.10,0.22));
+    // 空間配置: visible from start, moves+fades p=0.14-0.26
+    var m1=easeOut(phase(p,0.14,0.26));
     setT(t1,1-m1,lerp(ox[0],0,m1),lerp(oy[0],0,m1));
-    var a2=easeOut(phase(p,0.24,0.32)),m2=easeOut(phase(p,0.38,0.48));
+    // 候車溫度: appears p=0.20-0.30, fades p=0.38-0.50 (overlaps)
+    var a2=easeOut(phase(p,0.20,0.30)),m2=easeOut(phase(p,0.38,0.50));
     setT(t2,a2*(1-m2),lerp(ox[1],0,m2),lerp(oy[1],0,m2));
-    var a3=easeOut(phase(p,0.48,0.56)),m3=easeOut(phase(p,0.62,0.72));
+    // 資訊整合: appears p=0.44-0.54, fades p=0.62-0.74 (overlaps)
+    var a3=easeOut(phase(p,0.44,0.54)),m3=easeOut(phase(p,0.62,0.74));
     setT(t3,a3*(1-m3),lerp(ox[2],0,m3),lerp(oy[2],0,m3));
-    var af=easeOut(phase(p,0.72,0.82)),mf=easeOut(phase(p,0.90,1.0));
+    // FENDL: appears p=0.68-0.80, fades p=0.90-1.0
+    var af=easeOut(phase(p,0.68,0.80)),mf=easeOut(phase(p,0.90,1.0));
     tf.style.opacity=af*(1-mf);
     tf.style.transform='translate(-50%,-50%)';
     bg.style.opacity=easeOut(phase(p,0.88,1.0))*0.65;
   }
-  window.addEventListener('scroll',update,{passive:true});
-  update();
+  // rAF loop — works regardless of scroll event delivery
+  (function tick(){update();requestAnimationFrame(tick);})();
 })();
 </script>
 </body>
