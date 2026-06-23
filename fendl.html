@@ -639,7 +639,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     var rect=trigger.getBoundingClientRect();
     var scrolled=-rect.top;
     var total=trigger.offsetHeight-window.innerHeight;
-    var inRange=scrolled>-window.innerHeight&&scrolled<trigger.offsetHeight;
+    var inRange=scrolled>=-50&&scrolled<trigger.offsetHeight;
     overlay.style.display=inRange?'flex':'none';
     if(!inRange)return;
     var p=clamp(scrolled/total,0,1);
@@ -655,7 +655,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     bg.style.opacity=easeOut(phase(p,0.88,1.0))*0.65;
   }
   (function tick(){update();requestAnimationFrame(tick);})();
-})();
 })();
 </script>
 </body>
