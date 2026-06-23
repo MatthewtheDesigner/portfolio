@@ -392,30 +392,26 @@ footer {
     </div>
   </div>
 
-  <div class="project-content">
-
-    <div class="project-section reveal" style="position:relative;overflow:hidden;">
-      <img src="FENDL/%E8%B3%87%E7%94%A2%202.svg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5;pointer-events:none;">
-      <div style="position:relative;z-index:1;">
-        <div class="tools-grid" style="margin-top:0;margin-bottom:32px;">
+  <!-- Section 01: Scroll-driven animation -->
+  <div id="sec01-wrapper" style="height:500vh;position:relative;">
+    <div id="sec01-sticky" style="position:sticky;top:0;height:100vh;overflow:hidden;background:var(--bg);display:flex;align-items:center;justify-content:center;">
+      <div style="position:absolute;top:88px;left:var(--margin);z-index:2;">
+        <div class="tools-grid" style="margin-top:0;margin-bottom:16px;">
           <span class="tool-tag">工業設計</span>
           <span class="tool-tag">城市設施</span>
           <span class="tool-tag">使用者研究</span>
         </div>
-        <p class="project-section-label">01 — 設計概念</p>
-        <h3 class="project-section-heading">以改善候車體感舒適與資訊整合重新設計公車站</h3>
-        <p class="project-section-body">
-          我們著重在兩個問題面向:一是候車時候的溫度難以忍受，二是資訊分散難以閱讀。
-        </p>
-        <div style="margin-top:56px;width:50%;margin-left:auto;margin-right:auto;position:relative;">
-          <img src="FENDL/%E8%B3%87%E7%94%A2%203.svg" alt="設計概念圖 3" style="width:100%;display:block;">
-          <span style="position:absolute;top:12%;left:37%;font-family:'Noto Serif TC',serif;font-size:clamp(10px,1.4vw,18px);color:#1a1a1a;white-space:nowrap;">空間配置</span>
-          <span style="position:absolute;top:52%;left:3%;font-family:'Noto Serif TC',serif;font-size:clamp(10px,1.4vw,18px);color:#1a1a1a;white-space:nowrap;">候車溫度</span>
-          <span style="position:absolute;top:74%;left:52%;font-family:'Noto Serif TC',serif;font-size:clamp(10px,1.4vw,18px);color:#1a1a1a;white-space:nowrap;">資訊整合</span>
-          <span style="position:absolute;top:43%;left:34%;font-family:'Noto Serif TC',serif;font-size:clamp(10px,1.4vw,18px);color:#aaaaaa;white-space:nowrap;">候車</span>
-        </div>
+        <p class="project-section-label">01 &#8212; 設計概念</p>
       </div>
+      <img id="s1-bg" src="FENDL/%E8%B3%87%E7%94%A2%202.svg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;pointer-events:none;">
+      <span id="s1-t1" style="position:absolute;top:50%;left:50%;font-family:'Noto Serif TC',serif;font-size:clamp(18px,2.5vw,34px);color:var(--black);white-space:nowrap;opacity:0;transform:translate(calc(-50% + 14vw),calc(-50% - 18vh));">空間配置</span>
+      <span id="s1-t2" style="position:absolute;top:50%;left:50%;font-family:'Noto Serif TC',serif;font-size:clamp(18px,2.5vw,34px);color:var(--black);white-space:nowrap;opacity:0;transform:translate(calc(-50% - 24vw),calc(-50% + 2vh));">候車溫度</span>
+      <span id="s1-t3" style="position:absolute;top:50%;left:50%;font-family:'Noto Serif TC',serif;font-size:clamp(18px,2.5vw,34px);color:var(--black);white-space:nowrap;opacity:0;transform:translate(calc(-50% + 12vw),calc(-50% + 18vh));">資訊整合</span>
+      <span id="s1-fendl" style="position:absolute;top:50%;left:50%;font-family:'Roboto Condensed',sans-serif;font-weight:900;font-size:clamp(56px,10vw,140px);letter-spacing:0.08em;color:var(--black);white-space:nowrap;opacity:0;transform:translate(-50%,-50%);">FENDL</span>
     </div>
+  </div>
+
+  <div class="project-content">
 
     <div class="project-section reveal">
       <p class="project-section-label">02 — 設計過程</p>
@@ -616,6 +612,45 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
   }, { threshold: 0.2 });
   obs.observe(canvas);
+})();
+</script>
+
+<script>
+(function(){
+  var wrapper=document.getElementById('sec01-wrapper');
+  if(!wrapper) return;
+  function clamp(t,a,b){return Math.max(a,Math.min(b,t));}
+  function phase(p,s,e){return clamp((p-s)/(e-s),0,1);}
+  function easeOut(t){return 1-Math.pow(1-t,2.5);}
+  function lerp(a,b,t){return a+(b-a)*t;}
+  var t1=document.getElementById('s1-t1');
+  var t2=document.getElementById('s1-t2');
+  var t3=document.getElementById('s1-t3');
+  var tf=document.getElementById('s1-fendl');
+  var bg=document.getElementById('s1-bg');
+  var ox=[14,-24,12], oy=[-18,2,18];
+  function setT(el,opacity,vx,vy){
+    el.style.opacity=opacity;
+    el.style.transform='translate(calc(-50% + '+vx+'vw),calc(-50% + '+vy+'vh))';
+  }
+  function update(){
+    var rect=wrapper.getBoundingClientRect();
+    var scrolled=-rect.top;
+    var total=wrapper.offsetHeight-window.innerHeight;
+    var p=clamp(scrolled/total,0,1);
+    var a1=easeOut(phase(p,0,0.08)),m1=easeOut(phase(p,0.14,0.24));
+    setT(t1,a1*(1-m1),lerp(ox[0],0,m1),lerp(oy[0],0,m1));
+    var a2=easeOut(phase(p,0.24,0.32)),m2=easeOut(phase(p,0.38,0.48));
+    setT(t2,a2*(1-m2),lerp(ox[1],0,m2),lerp(oy[1],0,m2));
+    var a3=easeOut(phase(p,0.48,0.56)),m3=easeOut(phase(p,0.62,0.72));
+    setT(t3,a3*(1-m3),lerp(ox[2],0,m3),lerp(oy[2],0,m3));
+    var af=easeOut(phase(p,0.72,0.82)),mf=easeOut(phase(p,0.90,1.0));
+    tf.style.opacity=af*(1-mf);
+    tf.style.transform='translate(-50%,-50%)';
+    bg.style.opacity=easeOut(phase(p,0.88,1.0))*0.65;
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
 })();
 </script>
 </body>
