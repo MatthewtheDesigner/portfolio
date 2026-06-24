@@ -585,19 +585,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       }
       ctx.stroke();
     }
-    // Annotations
-    if (p > 0.88) {
-      var alpha = Math.min(1, (p - 0.88) / 0.12);
-      ctx.globalAlpha = alpha;
-      ctx.fillStyle = '#1a1a1a';
-      ctx.font = 'bold ' + fs + 'px "Roboto Condensed",sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textAlign = 'right';
-      ctx.fillText('2020  ( 1.6 )', xP(2020) - 4, yP(1.60) + 24);
-      ctx.textAlign = 'left';
-      ctx.fillText('2024  ( 1.65 )', xP(2024) + 4, yP(1.65) - 4);
-      ctx.globalAlpha = 1;
-    }
   }
   var started = false, startTs = null;
   function ease(t) { return 1 - Math.pow(1 - t, 2.8); }
