@@ -347,8 +347,10 @@ footer {
   .footer-name { font-size: 36px; }
   .footer-contact { text-align: left; }
 }
+.chart-legend { white-space: nowrap; }
 @media (max-width: 768px) {
   .s01-title { white-space: normal !important; font-size: 28px !important; }
+  .chart-legend { white-space: normal; }
 }
 </style>
 </head>
@@ -422,16 +424,14 @@ footer {
       <p class="project-section-label">02 — 設計過程</p>
       <h3 class="project-section-heading">研究與發展</h3>
       <p class="project-section-body">
-        在此填入設計過程說明。
+        一、由日益加劇的高溫氣候作為切入點，下圖為台灣自1880到現在的年均溫平均值差異表。
       </p>
       <!-- Temperature Anomaly Chart -->
       <div class="temp-chart-wrap" style="margin-top:56px;">
-        <div style="font-family:'Roboto Condensed',sans-serif;font-size:13px;letter-spacing:0.06em;color:var(--grey);line-height:2;margin-bottom:10px;">
-          0.15 &#176;C /10yr &nbsp;( 1898 &#8211; 2024 )<br>
-          0.32 &#176;C /10yr &nbsp;( 1995 &#8211; 2024 )
+        <div class="chart-legend" style="font-family:'Roboto Condensed',sans-serif;font-size:13px;letter-spacing:0.06em;color:var(--grey);line-height:2;margin-bottom:10px;">
+          0.15 &#176;C /10yr &nbsp;( 1898 &#8211; 2024 )<span class="legend-sep">&ensp;&ensp;</span>0.32 &#176;C /10yr &nbsp;( 1995 &#8211; 2024 )
         </div>
         <canvas id="tempChart" style="width:100%;display:block;"></canvas>
-        <p class="img-caption" style="margin-top:12px;">日本年均氣溫偏差 1880&#8211;2024（相對於 1991&#8211;2020 年平均值）</p>
       </div>
     </div>
 
