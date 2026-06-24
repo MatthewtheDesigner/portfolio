@@ -587,6 +587,27 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
       }
       ctx.stroke();
     }
+    // Horizontal underline 1980→2020 + label
+    if (p > 0.88) {
+      var ulp = Math.min(1, (p - 0.88) / 0.12);
+      var x80 = xP(1980), x20 = xP(2020);
+      var lineY = y0 + 10;
+      ctx.strokeStyle = '#1a1a1a';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(x80, lineY);
+      ctx.lineTo(x80 + (x20 - x80) * ulp, lineY);
+      ctx.stroke();
+      if (ulp > 0.85) {
+        var ta = Math.min(1, (ulp - 0.85) / 0.15);
+        ctx.globalAlpha = ta;
+        ctx.fillStyle = '#1a1a1a';
+        ctx.font = fs + 'px "Noto Serif TC",serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('自1980後，年均溫以每年0.1度增加', (x80 + x20) / 2, lineY + 18);
+        ctx.globalAlpha = 1;
+      }
+    }
   }
   var started = false, startTs = null;
   function ease(t) { return 1 - Math.pow(1 - t, 2.8); }
