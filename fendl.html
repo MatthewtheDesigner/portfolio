@@ -518,11 +518,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   var DPR = window.devicePixelRatio || 1;
   var lastP = 0;
   var PAD = { top: 32, right: 68, bottom: 40, left: 46 };
-  var MIN_Y = 1880, MAX_Y = 2024, MIN_V = -2.0, MAX_V = 2.0;
+  var MIN_Y = 1880, MAX_Y = 2024, MIN_V = -2.5, MAX_V = 2.0;
 
   function resize() {
     var w = canvas.parentElement.offsetWidth;
-    var h = Math.round(w * 0.30);
+    var h = Math.round(w * 0.33);
     canvas.width = w * DPR; canvas.height = h * DPR;
     canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
   }
