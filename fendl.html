@@ -450,10 +450,15 @@ footer {
             <!-- Red box around orange/yellow heat stress area -->
             <rect id="utci-box" x="220" y="25" width="200" height="70" fill="none" stroke="#CC4422" stroke-width="6"/>
             <!-- L-shape: horizontal from text right → x=220, then vertical up to box midpoint -->
-            <line x1="-700" y1="181" x2="220" y2="181" stroke="#CC4422" stroke-width="2"/>
+            <line x1="-105" y1="181" x2="220" y2="181" stroke="#CC4422" stroke-width="2"/>
             <line x1="220" y1="60" x2="220" y2="181" stroke="#CC4422" stroke-width="2"/>
           </svg>
         </div>
+      </div>
+
+      <!-- Bus Rider Age Chart -->
+      <div style="margin-top:56px;">
+        <canvas id="busAgeChart" style="width:100%;display:block;"></canvas>
       </div>
     </div>
 
@@ -699,6 +704,121 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     bg.style.opacity=af;
   }
   (function tick(){update();requestAnimationFrame(tick);})();
+})();
+</script>
+
+<script>
+(function(){
+  var data=[
+    {label:'15-19歲',v:[57,66,59]},
+    {label:'20-24歲',v:[40,38,43]},
+    {label:'25-29歲',v:[38,34,38]},
+    {label:'30-34歲',v:[41,31,42]},
+    {label:'35-39歲',v:[34,45,37]},
+    {label:'40-44歲',v:[52,33,56]},
+    {label:'45-49歲',v:[42,43,33]},
+    {label:'50-54歲',v:[50,36,37]},
+    {label:'55-59歲',v:[41,28,31]},
+    {label:'60-64歲',v:[35,27,29]},
+    {label:'65歲以上',v:[106,84,98]}
+  ];
+  var colors=['#5BB8D4','#F5A623','#7BC87A'];
+  var years=['96年','95年','94年'];
+  var canvas=document.getElementById('busAgeChart');
+  if(!canvas)return;
+  var DPR=window.devicePixelRatio||1;
+  var PAD={top:44,right:90,bottom:56,left:46};
+  var MAX_V=120;
+  var lastP=0;
+
+  function resize(){
+    var w=canvas.parentElement.offsetWidth;
+    var h=Math.round(w*0.42);
+    canvas.width=w*DPR;canvas.height=h*DPR;
+    canvas.style.width=w+'px';canvas.style.height=h+'px';
+  }
+  function draw(p){
+    lastP=p;
+    var ctx=canvas.getContext('2d');
+    var W=canvas.width/DPR,H=canvas.height/DPR;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.clearRect(0,0,W,H);
+    var cW=W-PAD.left-PAD.right,cH=H-PAD.top-PAD.bottom;
+    var fs=Math.max(9,Math.round(10*W/900));
+    function yP(v){return PAD.top+cH*(1-v/MAX_V);}
+    // Grid
+    ctx.strokeStyle='#E0DFDB';ctx.lineWidth=0.5;
+    [20,40,60,80,100,120].forEach(function(v){
+      ctx.beginPath();ctx.moveTo(PAD.left,yP(v));ctx.lineTo(PAD.left+cW,yP(v));ctx.stroke();
+    });
+    // Y labels
+    ctx.fillStyle='#aaaaaa';ctx.textAlign='right';
+    ctx.font=fs+'px "Roboto Condensed",sans-serif';
+    [0,20,40,60,80,100,120].forEach(function(v){
+      ctx.fillText(v,PAD.left-6,yP(v)+4);
+    });
+    // Y axis title
+    ctx.fillStyle='#aaaaaa';ctx.textAlign='left';
+    ctx.font=fs+'px "Noto Serif TC",serif';
+    ctx.fillText('人數',PAD.left-6,PAD.top-20);
+    // Bars
+    var groupW=cW/data.length;
+    var barW=Math.min(groupW*0.22,18);
+    var gap=barW*0.35;
+    var totalW=3*barW+2*gap;
+    data.forEach(function(grp,gi){
+      var gx=PAD.left+gi*groupW+groupW/2-totalW/2;
+      grp.v.forEach(function(val,vi){
+        var bx=gx+vi*(barW+gap);
+        var bh=cH*(val/MAX_V)*p;
+        var by=yP(0)-bh;
+        ctx.fillStyle=colors[vi];
+        ctx.fillRect(bx,by,barW,bh);
+        if(p>0.85){
+          var alpha=Math.min(1,(p-0.85)/0.15);
+          ctx.globalAlpha=alpha;
+          ctx.fillStyle='#555555';
+          ctx.font=Math.max(7,fs-2)+'px "Roboto Condensed",sans-serif';
+          ctx.textAlign='center';
+          ctx.fillText(val,bx+barW/2,by-3);
+          ctx.globalAlpha=1;
+        }
+      });
+      // X label
+      ctx.fillStyle='#aaaaaa';ctx.textAlign='center';
+      ctx.font=fs+'px "Roboto Condensed",sans-serif';
+      ctx.fillText(grp.label,PAD.left+gi*groupW+groupW/2,H-PAD.bottom+18);
+    });
+    // X axis title
+    ctx.fillStyle='#aaaaaa';ctx.textAlign='left';
+    ctx.font=fs+'px "Noto Serif TC",serif';
+    ctx.fillText('年齡',PAD.left+cW+6,H-PAD.bottom+18);
+    // Legend
+    var lx=W-PAD.right+14,ly=PAD.top;
+    years.forEach(function(yr,i){
+      ctx.fillStyle=colors[i];
+      ctx.fillRect(lx,ly+i*22,12,12);
+      ctx.fillStyle='#555555';ctx.textAlign='left';
+      ctx.font=fs+'px "Roboto Condensed",sans-serif';
+      ctx.fillText(yr,lx+16,ly+i*22+11);
+    });
+  }
+  var started=false,startTs=null;
+  function ease(t){return 1-Math.pow(1-t,2.5);}
+  function animate(ts){
+    if(!startTs)startTs=ts;
+    var t=Math.min((ts-startTs)/1800,1);
+    draw(ease(t));
+    if(t<1)requestAnimationFrame(animate);
+  }
+  resize();draw(0);
+  window.addEventListener('resize',function(){resize();draw(lastP);});
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&!started){started=true;requestAnimationFrame(animate);}
+    });
+  },{threshold:0.2});
+  obs.observe(canvas);
 })();
 </script>
 </body>
