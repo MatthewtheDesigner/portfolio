@@ -457,7 +457,8 @@ footer {
       </div>
 
       <!-- Bus Rider Age Chart -->
-      <div style="margin-top:56px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:32px;">
+        <div></div>
         <canvas id="busAgeChart" style="width:100%;display:block;"></canvas>
       </div>
     </div>
@@ -712,14 +713,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   var data=[
     {label:'15-19歲',v:[57,66,59]},
     {label:'20-24歲',v:[40,38,43]},
-    {label:'25-29歲',v:[38,34,38]},
-    {label:'30-34歲',v:[41,31,42]},
-    {label:'35-39歲',v:[34,45,37]},
-    {label:'40-44歲',v:[52,33,56]},
-    {label:'45-49歲',v:[42,43,33]},
-    {label:'50-54歲',v:[50,36,37]},
-    {label:'55-59歲',v:[41,28,31]},
-    {label:'60-64歲',v:[35,27,29]},
     {label:'65歲以上',v:[106,84,98]}
   ];
   var colors=['#5BB8D4','#F5A623','#7BC87A'];
