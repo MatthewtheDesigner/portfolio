@@ -866,11 +866,21 @@ footer {
   display: grid;
   grid-template-columns: 787fr 961.54fr;
   gap: 48px;
-  align-items: center;
+  align-items: end;
   max-width: 1200px;
   margin: 40px auto 0;
 }
 .s02-row > * { min-width: 0; }
+.s02-pie > svg { max-width: 380px; margin: 0 auto; }
+.s02-text { margin-top: 32px; }
+.s02-text .project-section-body { max-width: none; }
+.s02-rules { list-style: none; margin-top: 16px; }
+.s02-rules li {
+  display: grid; grid-template-columns: 2em 1fr;
+  font-family: 'Noto Serif TC', serif; font-size: var(--body);
+  color: var(--grey); line-height: 1.9;
+}
+.s02-rules li span { color: var(--black); font-weight: 700; }
 .s02-nest {
   max-width: 460px; width: 100%; justify-self: center;
   position: relative; aspect-ratio: 527 / 672;
@@ -1040,6 +1050,14 @@ footer {
         <text x="590" y="400" text-anchor="middle" style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:26px;fill:#1a1a1a;">依賴手機 App</text>
         <text x="590" y="436" text-anchor="middle" style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:26px;fill:#1a1a1a;">公車資訊用戶</text>
       </svg>
+        <div class="s02-text">
+          <p class="project-section-body">透過八篇論文調查，最後以三大設計規則製作原型。</p>
+          <ol class="s02-rules">
+            <li><span>一、</span>首頁資訊分類，做到資訊分流。</li>
+            <li><span>二、</span>以站點作為路線圖起始點，做出方向區別（北駛、南駛）。</li>
+            <li><span>三、</span>使用黑體，規定字體需大於 24px。</li>
+          </ol>
+        </div>
       </div>
       <!-- 功能需求比例圖（treemap），藍色系 -->
       <div class="s02-nest" role="img" aria-label="功能需求調查：50% 認為提供 10 分鐘內下一班車抵達的時間最為有用；20% 認為提供路線規劃功能最為有效；15% 認為提供公車路線資訊最為有效；5% 即時動態資訊；2.5%">
