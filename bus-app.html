@@ -870,7 +870,41 @@ footer {
   max-width: 1200px;
   margin: 40px auto 0;
 }
-.s02-nest { max-width: 400px; width: 100%; justify-self: center; }
+.s02-row > * { min-width: 0; }
+.s02-nest {
+  max-width: 460px; width: 100%; justify-self: center;
+  position: relative; aspect-ratio: 527 / 672;
+  container-type: inline-size;
+}
+.tm-box {
+  position: absolute;
+  box-shadow: inset 0 0 0 1.5px var(--bg);
+  padding: 4cqw 4cqw;
+  display: flex; flex-direction: column; gap: 1.6cqw;
+  overflow: hidden;
+  color: var(--black);
+}
+.tm-num {
+  font-family: 'Roboto Condensed', sans-serif; font-weight: 900;
+  font-size: 6cqw; letter-spacing: 0.04em; line-height: 1;
+}
+.tm-txt {
+  font-family: 'Noto Serif TC', serif; font-weight: 700;
+  font-size: 3.6cqw; line-height: 1.55;
+}
+.tm-1 { background: #1F4E8C; color: #fff; }
+.tm-1 .tm-num { font-size: 13cqw; }
+.tm-1 .tm-txt { font-size: 4.6cqw; color: rgba(255,255,255,0.85); }
+.tm-2 { background: #3F6FB0; color: #fff; }
+.tm-2 .tm-txt { color: rgba(255,255,255,0.85); }
+.tm-3 { background: #7FA4D6; color: #fff; }
+.tm-3 .tm-txt { color: rgba(255,255,255,0.9); }
+.tm-4 { background: #B4CBE8; padding: 3cqw 2.4cqw; }
+.tm-4 .tm-num { font-size: 4.6cqw; }
+.tm-4 .tm-txt { font-size: 3cqw; }
+.tm-5 { background: #D3E0F1; padding: 3cqw 2.4cqw; }
+.tm-5 .tm-num { font-size: 4cqw; }
+.tm-6 { background: #E6EDF6; padding: 0; }
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
@@ -1007,14 +1041,28 @@ footer {
         <text x="590" y="436" text-anchor="middle" style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:26px;fill:#1a1a1a;">公車資訊用戶</text>
       </svg>
       </div>
-      <!-- 巢狀比例圖（依 Figma Frame 3 → Rectangle 1 尺寸），藍色系 -->
-      <div class="s02-nest">
-        <svg viewBox="0 0 961.54 1398" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="巢狀比例圖" style="width:100%;height:auto;display:block;">
-          <rect x="0" y="0" width="961.54" height="1398" fill="#DCE6F2"/>
-          <rect x="0" y="0" width="398.9" height="861.3" fill="#9DBBE0"/>
-          <rect x="0" y="0" width="265.5" height="536.7" fill="#5383C4"/>
-          <rect x="0" y="0" width="133.4" height="291.35" fill="#1F4E8C"/>
-        </svg>
+      <!-- 功能需求比例圖（treemap），藍色系 -->
+      <div class="s02-nest" role="img" aria-label="功能需求調查：50% 認為提供 10 分鐘內下一班車抵達的時間最為有用；20% 認為提供路線規劃功能最為有效；15% 認為提供公車路線資訊最為有效；5% 即時動態資訊；2.5%">
+        <div class="tm-box tm-1" style="left:0;top:0;width:100%;height:49.4%;">
+          <span class="tm-num">50%</span>
+          <span class="tm-txt">認為提供 10 分鐘內下一班車<br>抵達的時間最為有用</span>
+        </div>
+        <div class="tm-box tm-2" style="left:0;top:49.4%;width:44.78%;height:50.6%;">
+          <span class="tm-num">20%</span>
+          <span class="tm-txt">認為提供路線規劃功能最為有效</span>
+        </div>
+        <div class="tm-box tm-3" style="left:44.78%;top:49.4%;width:36.62%;height:50.6%;">
+          <span class="tm-num">15%</span>
+          <span class="tm-txt">認為提供公車路線資訊最為有效</span>
+        </div>
+        <div class="tm-box tm-4" style="left:81.4%;top:49.4%;width:18.6%;height:30.96%;">
+          <span class="tm-num">5%</span>
+          <span class="tm-txt">即時動態資訊</span>
+        </div>
+        <div class="tm-box tm-5" style="left:81.4%;top:80.36%;width:12.33%;height:19.64%;">
+          <span class="tm-num">2.5%</span>
+        </div>
+        <div class="tm-box tm-6" style="left:93.73%;top:80.36%;width:6.27%;height:19.64%;"></div>
       </div>
     </div>
     <!-- 作品內容放這裡 -->
