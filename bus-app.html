@@ -861,8 +861,21 @@ footer {
   padding: 20px;
 }
 
+/* 02 使用族群調查：圓餅圖 + 巢狀比例圖同一列 */
+.s02-row {
+  display: grid;
+  grid-template-columns: 787fr 961.54fr;
+  gap: 48px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 40px auto 0;
+}
+.s02-nest { max-width: 400px; width: 100%; justify-self: center; }
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
+  .s02-row { grid-template-columns: 1fr; gap: 32px; }
+  .s02-nest { max-width: 320px; }
   .chart-mobile-img { display: block; }
   .chart-frame { display: none; }
   .tools-grid { display: none; }
@@ -971,7 +984,8 @@ footer {
       <p class="project-section-label">02 — 使用族群調查</p>
     </div>
 
-    <div class="reveal" style="max-width:640px;margin:40px auto 0;">
+    <div class="s02-row reveal">
+      <div class="s02-pie">
       <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="圓餅圖：45% 為依賴手機 App 公車資訊用戶" style="width:100%;height:auto;display:block;">
         <defs>
           <clipPath id="pie-all"><circle cx="400" cy="400" r="360"/></clipPath>
@@ -992,6 +1006,16 @@ footer {
         <text x="590" y="400" text-anchor="middle" style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:26px;fill:#1a1a1a;">依賴手機 App</text>
         <text x="590" y="436" text-anchor="middle" style="font-family:'Noto Serif TC',serif;font-weight:700;font-size:26px;fill:#1a1a1a;">公車資訊用戶</text>
       </svg>
+      </div>
+      <!-- 巢狀比例圖（依 Figma Frame 3 → Rectangle 1 尺寸），藍色系 -->
+      <div class="s02-nest">
+        <svg viewBox="0 0 961.54 1398" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="巢狀比例圖" style="width:100%;height:auto;display:block;">
+          <rect x="0" y="0" width="961.54" height="1398" fill="#DCE6F2"/>
+          <rect x="0" y="0" width="398.9" height="861.3" fill="#9DBBE0"/>
+          <rect x="0" y="0" width="265.5" height="536.7" fill="#5383C4"/>
+          <rect x="0" y="0" width="133.4" height="291.35" fill="#1F4E8C"/>
+        </svg>
+      </div>
     </div>
     <!-- 作品內容放這裡 -->
   </div>
