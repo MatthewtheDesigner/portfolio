@@ -920,9 +920,21 @@ footer {
 .s03-flow { max-width: 1220px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .s03-flow svg { min-width: 760px; }
 
+/* 03 手繪草圖相冊：左三右二 */
+.s03-gallery {
+  display: grid; grid-template-columns: 2.98fr 4.53fr; gap: 16px; align-items: start;
+  max-width: 1220px; margin: 80px auto 0;
+}
+.s03-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.s03-col img { display: block; width: 100%; background: #fff; }
+.s03-left img { height: auto; }
+.s03-right img { height: auto; }
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .s02-row { grid-template-columns: 1fr; gap: 32px; }
+  .s03-gallery { grid-template-columns: 1fr; margin-top: 48px; }
+  .s03-left img { flex: none; height: auto; }
   .s02-nest { max-width: 320px; }
   .chart-mobile-img { display: block; }
   .chart-frame { display: none; }
@@ -1119,6 +1131,17 @@ footer {
         <rect x="120" y="560" width="160" height="56" fill="#FAFAF8" stroke="#1F4E8C" stroke-width="1.5"/><text x="200.0" y="588.0" dy="0.36em" text-anchor="middle" font-size="22" font-weight="700" fill="#1a1a1a">公車動態</text>
         <rect x="520" y="560" width="160" height="56" fill="#1F4E8C"/><text x="600.0" y="588.0" dy="0.36em" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">路線圖</text>
       </svg>
+    </div>
+    <div class="s03-gallery reveal">
+      <div class="s03-col s03-left">
+        <img src="the%20Bus%20App/sketch-1.webp" alt="手繪草圖：轉乘與導航頁面" width="1200" height="1924" loading="lazy" decoding="async">
+        <img src="the%20Bus%20App/sketch-2.webp" alt="手繪草圖：分類搜尋結果與車資、時間" width="1200" height="1795" loading="lazy" decoding="async">
+        <img src="the%20Bus%20App/sketch-3.webp" alt="手繪草圖：站名、搜尋列與分類搜尋" width="1200" height="1712" loading="lazy" decoding="async">
+      </div>
+      <div class="s03-col s03-right">
+        <img src="the%20Bus%20App/sketch-4.webp" alt="手繪草圖：即時動態與路線圖" width="1200" height="1819" loading="lazy" decoding="async">
+        <img src="the%20Bus%20App/sketch-5.webp" alt="手繪草圖：首頁與無障礙、語言選項" width="1200" height="1756" loading="lazy" decoding="async">
+      </div>
     </div>
     <!-- 作品內容放這裡 -->
   </div>
