@@ -920,21 +920,18 @@ footer {
 .s03-flow { max-width: 1220px; margin: 0 auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .s03-flow svg { min-width: 760px; }
 
-/* 03 手繪草圖相冊：左三右二 */
+/* 03 手繪草圖相冊：上三下二（每列等高） */
 .s03-gallery {
-  display: grid; grid-template-columns: 2.98fr 4.53fr; gap: 6px; align-items: start;
+  display: flex; flex-direction: column; gap: 6px;
   max-width: 900px; margin: 80px auto 0;
 }
-.s03-col { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
-.s03-col img { display: block; width: 100%; background: #fff; }
-.s03-left img { height: auto; }
-.s03-right img { height: auto; }
+.s03-row { display: flex; gap: 6px; }
+.s03-row img { display: block; flex: var(--r) 1 0; min-width: 0; width: 100%; height: auto; background: #fff; }
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .s02-row { grid-template-columns: 1fr; gap: 32px; }
-  .s03-gallery { grid-template-columns: 1fr; margin-top: 48px; }
-  .s03-left img { flex: none; height: auto; }
+  .s03-gallery { margin-top: 48px; }
   .s02-nest { max-width: 320px; }
   .chart-mobile-img { display: block; }
   .chart-frame { display: none; }
@@ -1133,14 +1130,14 @@ footer {
       </svg>
     </div>
     <div class="s03-gallery reveal">
-      <div class="s03-col s03-left">
-        <img src="the%20Bus%20App/sketch-1.webp" alt="手繪草圖：轉乘與導航頁面" width="1200" height="1924" loading="lazy" decoding="async">
-        <img src="the%20Bus%20App/sketch-2.webp" alt="手繪草圖：分類搜尋結果與車資、時間" width="1200" height="1795" loading="lazy" decoding="async">
-        <img src="the%20Bus%20App/sketch-3.webp" alt="手繪草圖：站名、搜尋列與分類搜尋" width="1200" height="1712" loading="lazy" decoding="async">
+      <div class="s03-row">
+        <img src="the%20Bus%20App/sketch-1.webp" alt="手繪草圖：轉乘與導航頁面" width="1200" height="1924" style="--r:0.6237" loading="lazy" decoding="async">
+        <img src="the%20Bus%20App/sketch-2.webp" alt="手繪草圖：分類搜尋結果與車資、時間" width="1200" height="1795" style="--r:0.6685" loading="lazy" decoding="async">
+        <img src="the%20Bus%20App/sketch-3.webp" alt="手繪草圖：站名、搜尋列與分類搜尋" width="1200" height="1712" style="--r:0.7009" loading="lazy" decoding="async">
       </div>
-      <div class="s03-col s03-right">
-        <img src="the%20Bus%20App/sketch-4.webp" alt="手繪草圖：即時動態與路線圖" width="1200" height="1819" loading="lazy" decoding="async">
-        <img src="the%20Bus%20App/sketch-5.webp" alt="手繪草圖：首頁與無障礙、語言選項" width="1200" height="1756" loading="lazy" decoding="async">
+      <div class="s03-row">
+        <img src="the%20Bus%20App/sketch-4.webp" alt="手繪草圖：即時動態與路線圖" width="1200" height="1819" style="--r:0.6597" loading="lazy" decoding="async">
+        <img src="the%20Bus%20App/sketch-5.webp" alt="手繪草圖：首頁與無障礙、語言選項" width="1200" height="1756" style="--r:0.6834" loading="lazy" decoding="async">
       </div>
     </div>
     <!-- 作品內容放這裡 -->
