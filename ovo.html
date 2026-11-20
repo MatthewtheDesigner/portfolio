@@ -885,6 +885,7 @@ footer {
 }
 .nav-resume-btn { }
 </style>
+<script src="i18n.js"></script>
 </head>
 
 <body>
@@ -1247,8 +1248,8 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   table.addEventListener('mouseenter', function() {
     overlays.forEach(function(el) { el.parentNode && el.parentNode.removeChild(el); });
     overlays = [];
-    animateRow(document.getElementById('row-length'),     '目標車燈長：55mm');
-    animateRow(document.getElementById('row-light-type'), '發光方式：直射光');
+    animateRow(document.getElementById('row-length'),     (window.mwT ? mwT('目標車燈長：55mm') : '目標車燈長：55mm'));
+    animateRow(document.getElementById('row-light-type'), (window.mwT ? mwT('發光方式：直射光') : '發光方式：直射光'));
   });
 })();
 </script>

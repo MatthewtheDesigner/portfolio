@@ -71,6 +71,18 @@ Letter-spacing on Roboto Condensed:
 
 Line-height: `1.0` for display headings, `1.1–1.2` for section headings, `1.6` for meta values, `1.8–1.9` for body paragraphs.
 
+### 3.1 English version (語言切換為 EN 時)
+
+The site has a 中文 / EN switch in the nav. When English is active (`html.lang-en`, `lang="en"`), every element — body copy, headings, nav, captions, SVG `<text>` — switches to **Roboto Condensed**. Noto Serif TC is not used in the English version. Everything else in this section stays the same:
+
+- **Weights:** text that is Noto Serif 400 becomes Roboto Condensed 400; Noto Serif 700 becomes Roboto Condensed 700; labels already at 900 stay 900.
+- **Sizes:** `--heading` 56px, `--body` 24px, `--small` 18px (mobile 32 / 17 / 14px). Display sizes unchanged: hero name 108px / 64px, project hero title 124px, subtitle 27px, footer name 60px, nav "MW" 22px, about description 20px, fine print 14px.
+- **Letter-spacing:** 0.06em large display (hero title, footer name); 0.08em English name; 0.10–0.15em body-size labels and contact info; 0.18–0.25em small uppercase labels (`01 — DESIGN CONCEPT`, meta labels, tool tags). Body paragraphs keep 0.
+- **Line-height:** 1.0 display headings; 1.1–1.2 section headings; 1.6 meta values; 1.8–1.9 body paragraphs.
+- **Color:** `#1a1a1a` headings and key text; `#999` body and secondary text; `#c8c8c8` section labels, captions and other tertiary text.
+- **Section trio:** label `01 — LABEL` (Roboto 900, 18px, uppercase, 0.2em, light grey) → heading (Roboto Condensed 400, 56px, black, line-height 1.2) → body (Roboto Condensed 400, 24px, grey, line-height 1.9, max-width 760px, left-aligned).
+- **Writing:** section numbers keep `01 — ` and restart at 01 on each project page; captions start with `— ` and use ` / ` between theme and descriptor; English labels are short uppercase words (PSYCHOLOGICAL, EQUIPMENT); body copy is first person and describes the research and design process.
+
 ---
 
 ## 4. Layout grid
