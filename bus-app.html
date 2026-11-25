@@ -974,6 +974,22 @@ footer {
 .sk-nav:hover, .sk-close:hover { opacity: 1; }
 .sk-close:focus:not(:focus-visible), .sk-nav:focus:not(:focus-visible), .sk-stack:focus:not(:focus-visible) { outline: none; }
 
+/* 04 UI 元件展示 */
+.s04-ui { max-width: 960px; margin: 40px auto 0; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.ui-toggle { display: inline-flex; padding: 4px; border: 1px solid var(--border); border-radius: 999px; background: #fff; }
+.ui-mode {
+  font-family: 'Roboto Condensed', sans-serif; font-weight: 900; font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+  border: 0; background: none; color: var(--grey); padding: 10px 26px; border-radius: 999px; cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.ui-mode.is-on { background: var(--black); color: #fff; }
+.ui-mode:focus:not(:focus-visible) { outline: none; }
+.ui-sheet { position: relative; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+.ui-sheet img { display: block; width: 100%; height: auto; transition: opacity 0.5s ease; }
+.ui-sheet .ui-dark { position: absolute; inset: 0; opacity: 0; }
+.ui-sheet[data-mode="dark"] .ui-dark { opacity: 1; }
+.ui-sheet[data-mode="dark"] .ui-light { opacity: 0; }
+
 /* 03 操作影片 + Figma 原型 */
 .s03-demo {
   display: grid; grid-template-columns: 320px 1fr; gap: 60px;
@@ -1241,6 +1257,20 @@ footer {
         <figcaption class="img-caption">— Figma 互動原型（可直接點擊操作）</figcaption>
       </figure>
     </div>
+    <!-- 04 UI 元件展示（Figma 元件表，淺色／深色切換） -->
+    <div class="project-section reveal" style="margin-top:160px;margin-bottom:0;">
+      <p class="project-section-label">04 — UI 元件展示</p>
+    </div>
+    <div class="s04-ui reveal">
+      <div class="ui-toggle" role="group" aria-label="切換淺色／深色模式">
+        <button type="button" class="ui-mode is-on" data-mode="light" aria-pressed="true">Light</button>
+        <button type="button" class="ui-mode" data-mode="dark" aria-pressed="false">Dark</button>
+      </div>
+      <div class="ui-sheet" data-mode="light">
+        <img class="ui-light" src="the%20Bus%20App/ui-components-light.webp" alt="UI 元件表（淺色模式）" width="1800" height="5286" loading="lazy" decoding="async">
+        <img class="ui-dark" src="the%20Bus%20App/ui-components-dark.webp" alt="UI 元件表（深色模式）" width="1800" height="5286" loading="lazy" decoding="async" aria-hidden="true">
+      </div>
+    </div>
     <!-- 作品內容放這裡 -->
   </div>
 
@@ -1309,6 +1339,22 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     if (x0 === null) return;
     const dx = e.changedTouches[0].clientX - x0; x0 = null;
     if (Math.abs(dx) > 40) show(idx + (dx < 0 ? 1 : -1));
+  });
+})();
+
+// 04 UI 元件展示：淺色／深色切換
+(function () {
+  var sheet = document.querySelector('.ui-sheet');
+  if (!sheet) return;
+  var btns = document.querySelectorAll('.ui-mode');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var m = b.getAttribute('data-mode');
+      sheet.setAttribute('data-mode', m);
+      btns.forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      sheet.querySelector('.ui-light').setAttribute('aria-hidden', m === 'dark' ? 'true' : 'false');
+      sheet.querySelector('.ui-dark').setAttribute('aria-hidden', m === 'dark' ? 'false' : 'true');
+    });
   });
 })();
 </script>

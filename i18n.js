@@ -328,7 +328,11 @@
  "the Bus App 操作流程影片": "the Bus App walkthrough video",
  "— 操作流程影片": "— Walkthrough video",
  "the Bus App Figma 互動原型": "the Bus App Figma prototype",
- "— Figma 互動原型（可直接點擊操作）": "— Figma prototype (click to try it)"
+ "— Figma 互動原型（可直接點擊操作）": "— Figma prototype (click to try it)",
+ "04 — UI 元件展示": "04 — UI Components",
+ "切換淺色／深色模式": "Switch light / dark mode",
+ "UI 元件表（淺色模式）": "UI component sheet (light mode)",
+ "UI 元件表（深色模式）": "UI component sheet (dark mode)"
 };
   var KEY = 'mw-lang';
   var ATTRS = ['alt', 'aria-label', 'title', 'placeholder'];
